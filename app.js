@@ -312,6 +312,26 @@
     settingsNavActive=false;
     qsa('#settingsScreen .keyboard-nav-target').forEach(button=>button.classList.remove('keyboard-nav-target'));
   }
+  // v48: Main-menu shortcuts only. 1 = All / 2 = Korean / 3 = Foreign.
+  // Listen in capture phase so a toolbar button retaining keyboard focus
+  // cannot react to the same keypress as a native button activation.
+  function handleHomeCategoryShortcut(event){
+    if($('mainScreen').classList.contains('hidden') || modal ||
+      !$('modalBackdrop').classList.contains('hidden') ||
+      !$('noticeBackdrop').classList.contains('hidden') ||
+      !$('posterLightbox').classList.contains('hidden'))return;
+    if(event.repeat || event.ctrlKey || event.altKey || event.metaKey || event.shiftKey || event.isComposing)return;
+    const target=event.target;
+    if(target?.isContentEditable || target?.closest?.('[contenteditable="true"]') ||
+      ['INPUT','TEXTAREA','SELECT'].includes(target?.tagName))return;
+    const shortcuts={Digit1:'종합',Digit2:'한국 영화',Digit3:'외국 영화',
+      Numpad1:'종합',Numpad2:'한국 영화',Numpad3:'외국 영화'};
+    const category=shortcuts[event.code] || {'1':'종합','2':'한국 영화','3':'외국 영화'}[event.key];
+    if(!category)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    chooseCategory(category);
+  }
   function handleSettingsKeyboard(event){
     if($('settingsScreen').classList.contains('hidden')||modal||
       !$('noticeBackdrop').classList.contains('hidden')||
@@ -715,6 +735,8 @@ function renderPosterMarquee(itemsOverride){
     $('skipBtn').onclick=skipStage;
     $('nextBtn').onclick=nextScene;$('replayBtn').onclick=startGame;$('finishHomeBtn').onclick=goHome;
     $('modalClose').onclick=()=>modalClose();$('modalBackdrop').onclick=e=>{if(e.target===$('modalBackdrop'))modalClose();};
+    // v48: Numeric category selection on the home screen, including numpad.
+    document.addEventListener('keydown',handleHomeCategoryShortcut,true);
     // v47: Settings keyboard grid: Right×2, Down, Right, Down, Enter
     // selects 어려움 / 20문제 and starts. Capture before native button handlers.
     document.addEventListener('keydown',handleSettingsKeyboard,true);
