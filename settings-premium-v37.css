@@ -1,0 +1,372 @@
+/* FRAME! v37 — premium game-settings controls, desktop alignment. */
+@media (min-width: 761px) {
+  .screen-settings {
+    padding-top: 10px !important;
+    padding-bottom: 16px !important;
+    min-height: 0 !important;
+  }
+  .screen-settings .settings-wrap {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    min-height: 0 !important;
+    gap: 0 !important;
+  }
+  /* Place film emblem on exactly the same header row as the back control. */
+  .screen-settings .settings-back {
+    position: absolute !important;
+    top: 5px !important;
+    left: 0 !important;
+    z-index: 3;
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 0 19px !important;
+    margin: 0 !important;
+    border-radius: 15px;
+    background: rgba(255,253,250,.88);
+    border: 1px solid #ddc8b7;
+    box-shadow: 0 6px 18px rgba(103,72,49,.07);
+    color: #79563f;
+    font-size: 12px !important;
+    transition: background .2s ease, border-color .2s ease, box-shadow .2s ease !important;
+  }
+  .screen-settings .settings-back:hover {
+    transform: none !important;
+    background: #f9eee4;
+    border-color:#ae8466;
+    box-shadow:0 10px 22px rgba(107,70,46,.14);
+  }
+  .screen-settings .settings-top {
+    position: static !important;
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: center;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 65px 0 0 !important;
+    margin: 0 auto 16px !important;
+  }
+  .screen-settings .settings-emblem {
+    position: absolute !important;
+    top: 5px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: grid !important;
+    place-items: center;
+    width: 48px !important;
+    height: 48px !important;
+    margin: 0 !important;
+    border: 1px solid #e4cbb2;
+    border-radius: 17px;
+    background: linear-gradient(148deg,#fbf4e9,#e9cfb7);
+    box-shadow: 0 7px 19px #84573620, inset 0 1px 0 #fff9;
+    z-index: 1;
+  }
+  .screen-settings .settings-emblem svg { width: 25px !important; height: 25px !important; }
+  .screen-settings .settings-eyebrow {
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .23em;
+    margin: 0 0 9px !important;
+    line-height: 1.45;
+  }
+  .screen-settings #settingsHeading {
+    font-size: clamp(32px,3.5vw,39px) !important;
+    font-weight: 900;
+    line-height: 1.14 !important;
+    letter-spacing: -.065em;
+    margin: 0 0 13px !important;
+    color: #3f2b22;
+  }
+  .screen-settings .category-selection-label {
+    margin: 0 !important;
+    padding: 7px 18px !important;
+    min-height: 32px;
+    line-height: 17px;
+    border-radius: 999px;
+    background:linear-gradient(145deg,#fffaf4,#f1e2d5);
+    border:1px solid #ddc2aa;
+    box-shadow:inset 0 1px 0 #fff8;
+    color:#795036;
+    font-size:12px;
+    font-weight:800;
+  }
+  .screen-settings .launch-panel {
+    width: 100%;
+    padding-top: 22px !important;
+    margin-top: 4px !important;
+    border-top: 1px solid #e4d2c2;
+  }
+  .screen-settings .section-head {
+    margin-bottom: 17px !important;
+  }
+  .screen-settings .section-head h2 {
+    font-size: 19px;
+    font-weight: 900;
+    color: #493225;
+    letter-spacing: -.04em;
+  }
+  .screen-settings .difficulty-grid {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 18px !important;
+    max-width: 945px;
+    margin: 0 auto !important;
+  }
+  .screen-settings .difficulty {
+    min-height: 166px !important;
+    padding: 19px 14px 15px !important;
+    overflow: hidden;
+    isolation: isolate;
+    position: relative;
+    justify-content: center;
+    gap: 0;
+    border-radius: 21px !important;
+    background: linear-gradient(150deg,#fffefd 0%,#f8f1eb 100%) !important;
+    border: 1px solid color-mix(in srgb,var(--level-accent) 29%,#dfd2c8) !important;
+    box-shadow: 0 11px 24px rgba(94,63,41,.06),inset 0 1px 0 #fffd !important;
+    transition: transform .24s cubic-bezier(.2,.7,.2,1),border-color .24s ease,box-shadow .24s ease,background .24s ease;
+  }
+  .screen-settings .difficulty::before {
+    width: 166px;
+    height: 166px;
+    top: -105px;
+    right: -65px;
+    background: var(--level-accent);
+    opacity: .11;
+    filter: blur(30px);
+    pointer-events: none;
+  }
+  .screen-settings .difficulty::after {
+    content: '';
+    position: absolute;
+    inset: auto 23% 0;
+    height: 2px;
+    background: var(--level-accent);
+    opacity: 0;
+    border-radius: 8px 8px 0 0;
+    transition: opacity .25s ease, inset .25s ease;
+    pointer-events: none;
+  }
+  .screen-settings .difficulty:hover {
+    transform: translateY(-5px) !important;
+    filter: none !important;
+    background:linear-gradient(150deg,#ffffff,#fcf7f1) !important;
+    border-color: color-mix(in srgb,var(--level-accent) 68%,#fff) !important;
+    box-shadow:0 19px 36px rgba(87,59,38,.14),inset 0 1px 0 #fff !important;
+  }
+  .screen-settings .difficulty.selected {
+    background: linear-gradient(145deg,#fffefa 2%,var(--level-bg) 100%) !important;
+    border: 1.5px solid var(--level-accent) !important;
+    box-shadow: 0 0 0 3px color-mix(in srgb,var(--level-accent) 12%,transparent),0 14px 28px rgba(80,61,44,.10),inset 0 1px 0 #fff !important;
+  }
+  .screen-settings .difficulty.selected::after {
+    opacity: .88;
+    left: 23%;
+    right: 23%;
+  }
+  .screen-settings .difficulty .diff-id {
+    position: absolute;
+    left: 19px;
+    top: 15px;
+    color: color-mix(in srgb,var(--level-accent) 60%,#afa095);
+    font-family: inherit;
+    font-weight:800;
+    font-size:10px;
+    line-height:1.1;
+    letter-spacing:.09em;
+    opacity: .85;
+  }
+  .screen-settings .difficulty .diff-choice-mark {
+    position:absolute;
+    right:17px;
+    top:13px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    border:1px solid color-mix(in srgb,var(--level-accent) 33%,#d7cbc2);
+    color: transparent;
+    font-size:12px;
+    font-weight:900;
+    background:#ffffff96;
+    transition:background .2s ease, color .2s ease;
+  }
+  .screen-settings .difficulty.selected .diff-choice-mark {
+    background:var(--level-accent);
+    color:#fff;
+    border-color:var(--level-accent);
+    box-shadow:0 3px 9px color-mix(in srgb,var(--level-accent) 27%,transparent);
+  }
+  .screen-settings .difficulty .diff-top {
+    display:grid !important;
+    place-items:center;
+    width:45px !important;
+    height:45px;
+    border-radius:16px;
+    margin:0 0 10px !important;
+    border:1px solid color-mix(in srgb,var(--level-accent) 19%,#e9e2dd);
+    background:color-mix(in srgb,var(--level-accent) 8%,#fff);
+    box-shadow:inset 0 1px 0 #fff9;
+  }
+  .screen-settings .difficulty .diff-symbol {
+    display:block;
+    font-size:23px !important;
+    line-height:1;
+    transform:none;
+    color:var(--level-accent);
+  }
+  .screen-settings .difficulty strong {
+    font-size:25px !important;
+    font-weight:900;
+    line-height:1.17;
+    letter-spacing:-.045em;
+    margin:0 0 5px !important;
+  }
+  .screen-settings .difficulty .diff-desc {
+    font-size:11px !important;
+    line-height:1.4;
+    font-weight:500;
+    color:#9b8778;
+  }
+  .screen-settings .difficulty .diff-footer {
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center;
+    padding:9px 0 0 !important;
+    margin:0 !important;
+    font-size:14px;
+    line-height:1;
+    letter-spacing:3px;
+  }
+  .screen-settings .difficulty .diff-footer span {
+    white-space:nowrap;
+  }
+  .screen-settings .launch-footer {
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    align-items:center !important;
+    gap: 15px !important;
+    padding: 21px 0 5px !important;
+    margin:0 !important;
+  }
+  .screen-settings .round-choice {
+    width:auto;
+    margin:0 !important;
+    display:flex;
+    justify-content:center !important;
+  }
+  .screen-settings .segmented {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    min-height:54px;
+    padding:5px;
+    border-radius:16px;
+    background:#f0e7de;
+    border:1px solid #dfcebf;
+    box-shadow: inset 0 2px 6px #75503908, 0 4px 14px #7251390b;
+  }
+  .screen-settings .count-btn {
+    position:relative;
+    min-width:104px;
+    min-height:42px;
+    padding: 8px 17px;
+    border-radius:11px;
+    color:#856d5c;
+    border:1px solid transparent;
+    background:transparent;
+    font-size:12px;
+    font-weight:850;
+    box-shadow:none;
+    transition:background .17s ease,color .17s ease,border-color .17s ease,box-shadow .17s ease;
+  }
+  .screen-settings .count-btn:hover:not(:disabled) {
+    transform:none;
+    background:#fcf7f1;
+    color:#734b32;
+    box-shadow:0 2px 8px #68462f0e;
+  }
+  .screen-settings .count-btn.active {
+    transform:none;
+    color:#6e442e;
+    background:linear-gradient(165deg,#fffefd,#fff8f0);
+    border-color:#cba484;
+    box-shadow:0 2px 7px #5f43231c,inset 0 -2px 0 #bd8968!important;
+  }
+  .screen-settings .count-btn:disabled {
+    cursor:not-allowed;
+    filter:grayscale(.6);
+    opacity:.36;
+  }
+  .screen-settings #startBtn {
+    width:min(100%,355px) !important;
+    height:62px !important;
+    min-height:62px !important;
+    padding:7px 18px 7px 9px !important;
+    display:flex !important;
+    justify-content:center !important;
+    gap:17px !important;
+    border-radius:17px !important;
+    border:1px solid #986647;
+    background:linear-gradient(120deg,#ad7b57 0%,#86553a 55%,#70432f 100%) !important;
+    box-shadow:0 14px 30px rgba(110,67,41,.24), inset 0 1px 0 #ffffff43 !important;
+    color:#fffdf9;
+    font-size:17px !important;
+    font-weight:900;
+    animation:none !important;
+    transition:transform .23s ease,filter .23s ease,box-shadow .23s ease !important;
+  }
+  .screen-settings #startBtn:hover {
+    transform:translateY(-3px) !important;
+    filter:brightness(1.05) !important;
+    box-shadow:0 19px 37px #82543752,inset 0 1px 0 #ffffff56 !important;
+  }
+  .screen-settings #startBtn:active {transform:translateY(0)!important}
+  .screen-settings #startBtn .start-icon {
+    width:43px;
+    height:43px;
+    flex:none;
+    border-radius:12px;
+    background:#ffffff2c;
+    display:grid;
+    place-items:center;
+    border:1px solid #ffffff18;
+  }
+  .screen-settings #startBtn .start-icon svg {width:18px;height:18px}
+  .screen-settings #startBtn .start-arrow {margin-left:4px;opacity:.8}
+  .screen-settings .difficulty:focus-visible,
+  .screen-settings .count-btn:focus-visible,
+  .screen-settings #startBtn:focus-visible {
+    outline:3px solid #b78964 !important;
+    outline-offset:4px !important;
+  }
+}
+/* The mobile settings screen keeps its existing compact geometry. */
+@media (max-width:760px) {
+  .screen-settings .difficulty .diff-id,
+  .screen-settings .difficulty .diff-choice-mark {display:none!important}
+}
+@media (prefers-reduced-motion:reduce) {
+  .screen-settings .difficulty,.screen-settings #startBtn,.screen-settings .count-btn {transition:none!important}
+}
+
+@media (min-width:761px) and (max-height:700px) {
+  .screen-settings .settings-top { padding-top:57px!important; margin-bottom:9px!important }
+  .screen-settings .settings-back, .screen-settings .settings-emblem {top:3px!important}
+  .screen-settings .launch-panel {padding-top:14px!important}
+  .screen-settings .section-head {margin-bottom:10px!important}
+  .screen-settings .difficulty {min-height:138px!important;padding-top:12px!important;padding-bottom:10px!important}
+  .screen-settings .difficulty .diff-top {width:38px!important;height:38px!important;margin-bottom:5px!important}
+  .screen-settings .launch-footer {padding-top:14px!important;gap:10px!important}
+  .screen-settings #startBtn {height:54px!important;min-height:54px!important}
+}

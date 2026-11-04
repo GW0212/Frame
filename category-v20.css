@@ -1,0 +1,17 @@
+/* FRAME! v20 | movie-category choices */
+.screen-main .home-cta{width:100%;max-width:850px;margin-left:auto;margin-right:auto;}
+.movie-category-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:14px;max-width:760px;margin-inline:auto;width:100%;}
+.category-start{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;min-height:65px;border:1px solid #d9bda4;border-radius:15px;color:#67412c;background:linear-gradient(160deg,#fffaf5,#f2e8dd);box-shadow:0 8px 21px rgba(99,62,38,.10);font-size:clamp(14px,1.6vw,19px);font-weight:850;cursor:pointer;transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s ease,background .22s ease,border-color .22s ease;white-space:nowrap;}
+.category-start.category-all{color:#fff7ef;background:linear-gradient(120deg,#a87851,#75482f);border-color:#8a5f41;}
+.category-start svg{width:15px;height:15px;opacity:.62;flex-shrink:0;}
+.category-start .category-symbol{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:#a8795119;font-size:15px;}
+.category-start.category-all .category-symbol{background:#ffffff28;}
+.category-start:hover,.category-start:focus-visible{transform:translateY(-4px);box-shadow:0 15px 29px rgba(99,62,38,.19);border-color:#ad7855;}
+.category-start:active{transform:translateY(-1px) scale(.98);}
+.category-start:focus-visible{outline:3px solid #c9956d;outline-offset:3px;}
+.category-selection-label{display:inline-block;border:1px solid #dec7b4;border-radius:100px;background:#f4e8dc;color:#805136;font-size:13px;font-weight:850;padding:7px 19px;margin-top:10px;}
+.game-category-label{display:inline-block;border-radius:7px;background:#efe0d2;border:1px solid #d9bda4;padding:3px 9px;color:#75482f;font-weight:800;font-size:11px;}
+.count-btn:disabled{opacity:.34;cursor:not-allowed;filter:grayscale(.35);}
+@media(max-width:760px){.movie-category-choices{gap:8px}.category-start{min-height:55px;border-radius:11px;gap:5px;font-size:clamp(12px,3.7vw,16px)}.category-start .category-symbol{width:18px;height:18px;font-size:12px}.category-start svg{display:none}.screen-main .home-cta{width:100%;}}
+@media(max-width:350px){.movie-category-choices{gap:5px}.category-start{font-size:11px;min-height:48px}.category-start .category-symbol{display:none}}
+@media(prefers-reduced-motion:reduce){.category-start{transition:none!important}}

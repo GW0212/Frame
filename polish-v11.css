@@ -1,0 +1,43 @@
+/* FRAME v11 — spacing, centered dialogs, vertical answer action */
+:root { --v11-hairline: #e7d7c9; }
+/* Layout: give each successive control room to breathe while keeping a one-screen desktop composition. */
+.section-head { margin-bottom: 15px!important; }
+.difficulty-grid { gap: 15px!important; }
+.launch-footer { gap: 13px!important; padding-top: 17px!important; padding-bottom: 14px!important; }
+.round-choice { gap: 0!important; justify-content: center!important; }
+.round-choice .segmented { display:flex; justify-content:center; align-items:center; }
+.count-btn { min-width: 62px; }
+.below-bar { padding-top: 14px!important; margin-top: 2px!important; }
+.below-bar>div { justify-content:center!important; }
+.footer-link { padding: 4px 12px; }
+/* Dialog alignment: retain orderly content while centering the presentation. */
+.modal:has(.instructions) .modal-kicker,
+.modal:has(.instructions) .modal-title,
+.modal:has(.games-list) .modal-kicker,
+.modal:has(.games-list) .modal-title,
+.modal:has(.games-list) .modal-desc { text-align:center!important; }
+.modal:has(.instructions) .instructions { margin-top: 20px; }
+.modal:has(.instructions) .instruction-row { display:flex; flex-direction:column; justify-content:center; text-align:center; gap:6px; }
+.modal:has(.instructions) .instruction-row strong, .modal:has(.instructions) .instruction-row small { text-align:center; }
+.modal:has(.games-list) .games-list { margin-top:20px; }
+.modal:has(.games-list) .other-game { position:relative; justify-content:center; text-align:center; padding:12px 42px; }
+.modal:has(.games-list) .other-game-icon { position:absolute; left:12px; }
+.modal:has(.games-list) .other-game .go { position:absolute; right:17px; margin:0; }
+/* Place the Next Scene button directly below the time-until-advance caption. */
+.stage-bottom { display:flex!important; flex-direction:column!important; align-items:center!important; justify-content:center!important; gap:10px!important; text-align:center!important; margin-top:14px; }
+.stage-bottom #stageHint { display:block; }
+.stage-bottom .next-button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-width:128px; font-size:12px; padding:10px 16px; }
+.stage-bottom .next-button.hidden { display:none!important; }
+@media (min-width:761px) and (max-height:800px) {
+  .section-head { margin-bottom:10px!important; }
+  .launch-footer { gap:9px!important; padding-top:11px!important; padding-bottom:9px!important; }
+  .below-bar { padding-top:9px!important; }
+  .difficulty-grid {gap:12px!important;}
+}
+@media (max-width:760px) {
+ .launch-footer{gap:13px!important;padding-top:14px!important;}
+ .section-head{margin-bottom:12px!important;}
+ .below-bar{padding-top:13px!important;}
+ .modal:has(.games-list) .other-game{font-size:12px; padding:12px 34px;}
+ .modal:has(.games-list) .other-game-icon{left:5px;width:30px;height:30px;}
+}

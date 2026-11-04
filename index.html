@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#f8f5f0" name="theme-color"/>
+<meta content="영화 장면 맞추기 게임 · 3초 동안 장면을 보고 5초 동안 영화 제목을 떠올려 보세요." name="description"/>
+<meta content="FRAME! | 영화 장면 맞추기 게임" property="og:title"/>
+<meta content="한 장면, 단 3초. 어떤 영화인지 기억하시나요?" property="og:description"/>
+<title>FRAME! | 영화 장면 맞추기 게임</title>
+<link href="./assets/favicon.svg?v=5" rel="icon" type="image/svg+xml"/>
+<link href="./assets/favicon-32.png?v=5" rel="icon" type="image/png" sizes="32x32"/>
+<link href="./assets/favicon-16.png?v=5" rel="icon" type="image/png" sizes="16x16"/>
+<link href="./assets/apple-touch-icon.png?v=5" rel="apple-touch-icon"/>
+<link href="./style.css" rel="stylesheet"/>
+<link href="./theme-light.css" rel="stylesheet"/>
+<link href="./layout-centered.css" rel="stylesheet"/>
+<link href="./layout-viewport.css?v=7" rel="stylesheet"/>
+<link href="./effects-v7.css?v=25" rel="stylesheet"/><link rel="stylesheet" href="./layout-3levels.css?v=9"/><link rel="stylesheet" href="./refinement-v10.css?v=11"/>
+<link rel="stylesheet" href="./polish-v11.css?v=11"/>
+<link rel="stylesheet" href="./mobile-v12.css?v=12"/>
+<link rel="stylesheet" href="./layout-v16.css?v=16"/>
+<link rel="stylesheet" href="./poster-marquee-v17.css?v=18"/>
+<link rel="stylesheet" href="./poster-marquee-v19.css?v=19"/>
+<link rel="stylesheet" href="./category-v20.css?v=20"/>
+<link rel="stylesheet" href="./mobile-final-v22.css?v=22"/>
+<link rel="stylesheet" href="./refinement-v24.css?v=24"/>
+<link rel="stylesheet" href="./layout-v26.css?v=26"/>
+<link rel="stylesheet" href="./skip-v28.css?v=28"/>
+<link rel="stylesheet" href="./mobile-safari-v29.css?v=29"/>
+<link rel="stylesheet" href="./mobile-polish-v30.css?v=30"/>
+<link rel="stylesheet" href="./finish-responsive-v31.css?v=31"/>
+<link rel="stylesheet" href="./finish-scroll-v32.css?v=32"/>
+<link rel="stylesheet" href="./mobile-safari-v35.css?v=35"/>
+<link rel="stylesheet" href="./settings-premium-v37.css?v=37"/>
+<link rel="stylesheet" href="./tier-cards-v39.css?v=40"/>
+<script src="./poster-seed-v22.js?v=42"></script>
+</head>
+<body>
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+<symbol id="i-play" viewbox="0 0 24 24"><path d="m8 5 12 7-12 7V5Z" fill="currentColor" stroke="none"></path></symbol>
+<symbol id="i-pause" viewbox="0 0 24 24"><rect fill="currentColor" height="16" rx="1" stroke="none" width="4" x="6" y="4"></rect><rect fill="currentColor" height="16" rx="1" stroke="none" width="4" x="14" y="4"></rect></symbol>
+<symbol id="i-film" viewbox="0 0 24 24"><rect height="18" rx="3" width="18" x="3" y="3"></rect><path d="M7 3v18M17 3v18M3 8h4m-4 8h4m10-8h4m-4 8h4"></path></symbol>
+<symbol id="i-arrow" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></symbol>
+<symbol id="i-back" viewbox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></symbol>
+<symbol id="i-volume" viewbox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm4 4a4 4 0 0 1 0 6m3-9a8 8 0 0 1 0 12"></path></symbol>
+<symbol id="i-mute" viewbox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"></path></symbol>
+<symbol id="i-x" viewbox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"></path></symbol>
+<symbol id="i-refresh" viewbox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2 6m2-11v5h-5"></path></symbol>
+<symbol id="i-home" viewbox="0 0 24 24"><path d="m3 11 9-8 9 8v10H3V11Zm7 10v-7h4v7"></path></symbol>
+<symbol id="i-info" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6m0-10v.5"></path></symbol>
+<symbol id="i-grid" viewbox="0 0 24 24"><rect height="7" rx="1" width="7" x="3" y="3"></rect><rect height="7" rx="1" width="7" x="14" y="3"></rect><rect height="7" rx="1" width="7" x="3" y="14"></rect><rect height="7" rx="1" width="7" x="14" y="14"></rect></symbol>
+<symbol id="i-external" viewbox="0 0 24 24"><path d="M13 5h6v6m0-6-9 9"></path><path d="M19 14v5H5V5h7"></path></symbol>
+<symbol id="i-check" viewbox="0 0 24 24"><path d="m4 12 5 5L20 6"></path></symbol>
+<symbol id="i-settings" viewbox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9l2.1 2.1m10 10 2.1 2.1m0-14.2L17 7m-10 10-2.1 2.1"></path></symbol>
+</svg>
+<div class="app-shell">
+<div class="ambient ambient-1"></div><div class="ambient ambient-2"></div>
+<header class="topbar">
+<button aria-label="메인 화면" class="brand" id="logoBtn"><span class="brand-mark"><span></span><span></span><span></span><span></span></span><span>FRAME<span class="brand-dot">.</span></span></button>
+
+<nav aria-label="상단 메뉴" class="header-actions">
+<button class="nav-button" id="howBtn"><svg><use href="#i-info"></use></svg><span>게임 방법</span></button>
+<button class="nav-button" id="otherBtn"><svg><use href="#i-grid"></use></svg><span>이외 게임</span></button>
+<button aria-label="사운드 켜기 또는 끄기" class="nav-icon" id="soundBtn" title="사운드"><svg><use href="#i-mute"></use></svg></button>
+</nav>
+</header>
+<main class="screen screen-main" id="mainScreen">
+<div class="main-layout">
+<section class="hero-copy">
+
+<h1>영화 장면 맞추기 게임</h1><p class="hero-tagline">3초간 장면을 기억하고, 5초 안에 영화 제목을 맞혀보세요.</p>
+
+
+<div class="status-line" hidden aria-hidden="true"><span class="status-indicator" id="dataDot"></span><span id="dataStatus"></span><button class="text-link" id="libraryBtn" tabindex="-1" aria-hidden="true">라이브러리 보기</button></div>
+</section>
+<section aria-label="영화 퀴즈 대표 포스터" class="hero-display">
+<div class="poster-glow"></div>
+<div class="feature-frame poster-marquee-frame">
+  <div class="frame-inner poster-marquee-inner">
+    <div class="poster-marquee" id="posterMarquee" aria-label="영화 포스터 미리보기">
+      <div class="poster-marquee-track" id="posterMarqueeTrack"></div>
+    </div>
+    <div class="poster-marquee-fallback" id="posterMarqueeFallback">
+      <img alt="필름과 클래퍼보드로 꾸민 영화 퀴즈 일러스트" src="./assets/hero-cinema-v10.svg"/>
+    </div>
+  </div>
+</div>
+</section>
+</div>
+<section class="home-cta" aria-label="시작하기">
+<div class="movie-category-choices" role="group" aria-label="플레이할 영화 종류 선택">
+<button class="category-start category-all" type="button" data-category="종합" aria-label="종합 영화 퀴즈 선택"><span class="category-symbol" aria-hidden="true"><svg class="category-icon"><use href="#i-film"></use></svg></span><span>종합</span><svg aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+<button class="category-start" type="button" data-category="한국 영화" aria-label="한국 영화 퀴즈 선택"><span class="category-symbol" aria-hidden="true">🇰🇷</span><span>한국 영화</span><svg aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+<button class="category-start" type="button" data-category="외국 영화" aria-label="외국 영화 퀴즈 선택"><span class="category-symbol" aria-hidden="true">🌐</span><span>외국 영화</span><svg aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+</div>
+
+</section>
+<div class="below-bar"><div><a class="footer-link" id="devBtn" href="https://gw0212.github.io/" target="_blank" rel="noopener noreferrer">개발자 정보 <svg><use href="#i-external"></use></svg></a></div></div>
+</main>
+<main class="screen screen-settings hidden" id="settingsScreen" aria-labelledby="settingsHeading">
+  <div class="settings-wrap">
+    <button class="settings-back" id="settingsBackBtn" aria-label="메인 화면으로 돌아가기"><svg><use href="#i-back"></use></svg> 메인으로</button>
+    <div class="settings-top"><div class="settings-emblem" aria-hidden="true"><svg><use href="#i-film"></use></svg></div><p class="settings-eyebrow">READY FOR YOUR QUIZ?</p><h1 id="settingsHeading">게임 설정</h1><div class="category-selection-label" id="selectedCategoryLabel" aria-live="polite">종합</div></div>
+<section aria-label="게임 설정" class="launch-panel">
+<div class="section-head"><div><h2>난이도 선택 </h2></div><div class="current-mode" hidden="" id="modePill">EASY MODE</div></div>
+<div aria-label="난이도 선택" class="difficulty-grid" role="group">
+<button type="button" class="difficulty tier-card selected" data-level="쉬움" aria-pressed="true" aria-label="쉬움 난이도, 별 1개, 유명하고 익숙한 장면">
+  <span class="tier-top"><span class="tier-number">01 <span>/ EASY</span></span></span>
+  <span class="tier-body">
+    <span class="tier-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="5" y="8" width="22" height="16" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="M11 8v16M21 8v16M5 13h6M5 19h6M21 13h6M21 19h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="m14 12 6 4-6 4v-8Z" fill="currentColor"/></svg></span>
+    <span class="tier-text"><strong class="tier-name">쉬움</strong><span class="tier-description">유명하고 익숙한 장면</span></span>
+  </span>
+  <span class="tier-bottom"><span class="tier-stars" aria-hidden="true"><span class="tier-stars-on">★</span><span class="tier-stars-off">☆☆</span></span></span>
+</button>
+<button type="button" class="difficulty tier-card" data-level="중간" aria-pressed="false" aria-label="중간 난이도, 별 2개, 조금 더 세심한 관찰">
+  <span class="tier-top"><span class="tier-number">02 <span>/ NORMAL</span></span></span>
+  <span class="tier-body">
+    <span class="tier-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><circle cx="14.8" cy="14.8" r="8.3" stroke="currentColor" stroke-width="2"/><path d="m21.4 21.4 5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M12.5 14.5h4.7M14.8 12.2v4.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+    <span class="tier-text"><strong class="tier-name">중간</strong><span class="tier-description">조금 더 세심한 관찰</span></span>
+  </span>
+  <span class="tier-bottom"><span class="tier-stars" aria-hidden="true"><span class="tier-stars-on">★★</span><span class="tier-stars-off">☆</span></span></span>
+</button>
+<button type="button" class="difficulty tier-card" data-level="어려움" aria-pressed="false" aria-label="어려움 난이도, 별 3개, 진짜 영화 팬을 위한 도전">
+  <span class="tier-top"><span class="tier-number">03 <span>/ HARD</span></span></span>
+  <span class="tier-body">
+    <span class="tier-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="16" r="5.4" stroke="currentColor" stroke-width="1.8"/><path d="M16 2.5v6M16 23.5v6M2.5 16h6M23.5 16h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg></span>
+    <span class="tier-text"><strong class="tier-name">어려움</strong><span class="tier-description">진짜 영화 팬을 위한 도전</span></span>
+  </span>
+  <span class="tier-bottom"><span class="tier-stars" aria-hidden="true"><span class="tier-stars-on">★★★</span><span class="tier-stars-off"></span></span></span>
+</button>
+</div>
+<div class="launch-footer"><div class="round-choice"><div class="segmented"><button aria-pressed="true" class="count-btn active" data-count="10">10문제</button><button aria-pressed="false" class="count-btn" data-count="20">20문제</button><button aria-pressed="false" class="count-btn" data-count="all" id="allCountBtn">전체</button></div></div><button class="start-button" id="startBtn"><span class="start-icon"><svg><use href="#i-play"></use></svg></span><span>게임 시작</span><svg class="start-arrow"><use href="#i-arrow"></use></svg></button></div>
+</section>
+    
+  </div>
+</main>
+
+<main aria-live="polite" class="screen screen-game hidden" id="gameScreen">
+<div class="game-top"><div class="game-meta"><span class="game-kicker">NOW PLAYING <span class="small-red">●</span></span><span class="game-badges"><span class="game-category-label" id="gameCategory">종합</span><span class="level-label" id="gameLevel">쉬움</span></span><span class="game-index">SCENE <strong id="gameIndex">01</strong> <span class="muted">/</span> <span id="gameTotal">10</span></span></div><div class="game-controls"><button class="pause-button" id="pauseBtn"><svg><use href="#i-pause"></use></svg><span>일시정지</span> <kbd>SPACE</kbd></button></div></div>
+<div class="progress-track"><div class="progress-fill" id="overallProgress"></div></div>
+<section class="game-stage">
+<div class="stage-heading"><h2 id="stageTitle">이 장면을 기억하세요.</h2><p id="stageSubtitle">3초 동안 영화 장면이 공개됩니다.</p></div>
+<div class="game-visual" id="gameVisual">
+<div class="scene-panel" id="scenePanel"><img alt="영화 장면" id="sceneImage"/><div class="scene-vignette"></div><div class="scene-timer"><span>SCENE VISIBLE</span><b id="sceneTimer">3.0s</b></div></div>
+<div class="guess-panel hidden" id="guessPanel"><div class="guess-grain"></div><div class="guess-middle"><div class="countdown-number" id="guessNumber">5</div><span class="guess-caption">머릿속으로 정답을 맞혀보세요</span><div class="countdown-segments" id="countSegments"><span></span><span></span><span></span><span></span><span></span></div></div></div>
+<div class="reveal-panel hidden" id="revealPanel"><div class="reveal-pattern"></div><div class="reveal-inner"><div class="poster-slot"><img alt="정답 영화 포스터" id="posterImage" loading="eager" decoding="sync"/><div class="poster-fallback hidden" id="posterFallback"><svg><use href="#i-film"></use></svg><span>POSTER</span></div></div><div class="answer-content"><span class="answer-label"><svg><use href="#i-check"></use></svg> THE ANSWER IS</span><h3 id="answerName">영화 제목</h3><div class="answer-rule"></div><p>바로 이 영화였습니다!</p><span class="answer-number" id="answerNumber">SCENE 001</span><span class="reveal-next-label">3초 후 자동으로 다음 장면</span></div></div></div>
+</div>
+<div class="stage-bottom"><span id="stageHint" class="hidden"></span><span class="stage-line"></span><button class="skip-button" id="skipBtn" type="button" aria-label="현재 단계를 건너뛰기">Skip <svg aria-hidden="true"><use href="#i-arrow"></use></svg></button><button class="next-button hidden" id="nextBtn">다음 장면 <svg><use href="#i-arrow"></use></svg></button></div>
+</section>
+</main>
+<main class="screen screen-finish hidden" id="finishScreen"><div class="finish-card finish-gallery-card">
+<div class="finish-gallery-heading"><span class="finish-gallery-kicker">SESSION COMPLETE</span><h2>이번 회차의 영화</h2><div class="finish-gallery-badges"><span id="finishCategory">종합</span><span id="finishLevel">쉬움</span><span>총 <strong id="finishCount">10</strong>개 장면</span></div></div>
+<div class="finish-poster-grid" id="finishPosterGrid" aria-label="이번 회차에 출제된 영화 목록"></div>
+<div class="finish-gallery-bottom"><div class="finish-actions"><button class="button-main" id="replayBtn"><svg><use href="#i-refresh"></use></svg> 다시 플레이</button><button class="button-secondary" id="finishHomeBtn"><svg><use href="#i-home"></use></svg> 메인으로</button></div></div>
+</div></main>
+
+</div>
+<div class="modal-backdrop hidden" id="modalBackdrop" role="presentation"><div aria-labelledby="modalTitle" aria-modal="true" class="modal" role="dialog"><button aria-label="닫기" class="modal-close" id="modalClose"><svg><use href="#i-x"></use></svg></button><div id="modalContent"></div></div></div>
+<div class="poster-lightbox hidden" id="posterLightbox" role="presentation" aria-hidden="true">
+  <div class="poster-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="posterLightboxTitle" tabindex="-1">
+    <button type="button" class="poster-lightbox-close" id="posterLightboxClose" aria-label="확대 포스터 닫기"><svg aria-hidden="true"><use href="#i-x"></use></svg></button>
+    <img id="posterLightboxImage" src="" alt="선택한 영화 포스터 확대 이미지" />
+    <p id="posterLightboxTitle" class="poster-lightbox-title"></p>
+  </div>
+</div>
+<div class="notice-backdrop hidden" id="noticeBackdrop" role="presentation"><div class="notice-card" role="alertdialog" aria-modal="true" aria-labelledby="noticeTitle"><div class="notice-icon" aria-hidden="true">✦</div><h2 id="noticeTitle">안내</h2><p id="noticeMessage">링크 추가 전입니다.</p><button id="noticeOkBtn" class="notice-confirm">확인</button></div></div>
+<div aria-live="polite" class="toast-container" id="toastContainer" role="status"></div>
+<span hidden id="year"></span>
+<script src="./demo-data.js?v=11"></script>
+<script src="./catalog-v27.js?v=42"></script>
+<script src="./fast-audio-v36.js?v=36"></script>
+<script src="./app.js?v=42"></script>
+</body>
+</html>

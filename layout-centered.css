@@ -1,0 +1,59 @@
+
+/* FRAME! v4 — centered minimal layout refinement */
+[hidden]{display:none!important}
+.topbar{position:relative;display:flex;justify-content:center;align-items:center;min-height:91px;height:auto;padding:18px 35px}
+.topbar .brand{margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:29px;line-height:1.1}
+.topbar .header-actions{position:absolute;right:35px;top:50%;transform:translateY(-50%)}
+.screen-main{padding-top:43px}
+.main-layout{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:auto;text-align:center}
+.hero-copy{width:100%;padding:0;display:flex;flex-direction:column;align-items:center}
+.hero-copy h1{font-size:clamp(29px,4vw,48px);letter-spacing:-2.5px;line-height:1.35;margin:0 0 14px;font-weight:900}
+.status-line{width:min(100%,540px);max-width:none;justify-content:center;flex-wrap:wrap;margin:0 auto;padding:10px 0 0;border:0;font-size:12px}
+.status-line .text-link{margin-left:6px}
+.hero-display{width:min(100%,680px);height:auto;padding:0;margin:4px auto 0}
+.feature-frame{transform:none;border-radius:15px;padding:8px;box-shadow:0 15px 35px #7d53391d}
+.feature-frame:hover{transform:none}
+.frame-inner{border-radius:9px}
+.poster-glow{opacity:.55}
+.launch-panel{margin:27px auto 0;max-width:1040px;padding-top:24px}
+.section-head{display:flex;justify-content:center;text-align:center;margin-bottom:22px}
+.section-head h2{font-size:23px;margin:0;letter-spacing:-.8px}
+.current-mode{display:none}
+.difficulty-grid{gap:16px}
+.difficulty{min-height:174px;padding:20px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:14px}
+.diff-top{display:flex;justify-content:center;width:100%}
+.diff-symbol{font-size:27px}
+.difficulty strong{margin:9px 0 6px;font-size:27px}
+.diff-desc{font-size:12px;line-height:1.6}
+.diff-footer{margin:13px 0 0;padding:0;justify-content:center;width:100%;font-size:14px}
+.launch-footer{flex-direction:column;justify-content:center;align-items:center;gap:19px;padding:24px 0 16px}
+.round-choice{justify-content:center;flex-wrap:wrap;gap:12px}
+.start-button{width:min(100%,300px);justify-content:center;gap:14px}
+.start-arrow{display:none}
+.below-bar{padding:15px 0 5px;border-top:1px solid #e6d9cb;display:flex;justify-content:center;align-items:center;text-align:center}
+.below-bar>div{justify-content:center;gap:25px}
+.footer-link{font-size:12px}
+@media(max-width:760px){
+ .topbar{min-height:108px;padding:14px 12px 10px;display:flex;flex-direction:column;gap:10px}
+ .topbar .brand{font-size:26px}
+ .topbar .header-actions{position:static;transform:none;justify-content:center}
+ .header-actions .nav-button{width:auto;min-width:40px;padding:0 12px}
+ .header-actions .nav-button span{display:inline}
+ .screen-main{padding:27px 18px 30px}
+ .main-layout{gap:12px}
+ .hero-copy h1{font-size:clamp(26px,6.3vw,38px);letter-spacing:-1.2px;margin-bottom:5px}
+ .hero-display{margin:5px auto 0;padding:0}
+ .feature-frame{transform:none}
+ .launch-panel{margin-top:25px;padding-top:23px}
+ .section-head h2{font-size:22px}
+ .difficulty-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .difficulty{min-height:155px;padding:14px 8px}
+ .difficulty strong{font-size:25px;margin:7px 0 5px}
+ .diff-desc{font-size:11px}
+ .diff-footer{padding:0;margin-top:12px}
+ .launch-footer{align-items:center;gap:17px}
+ .round-choice{justify-content:center}
+ .start-button{width:min(100%,340px)}
+ .below-bar{justify-content:center}
+}
+@media(max-width:390px){.topbar .header-actions{gap:4px}.header-actions .nav-button{padding:0 8px;font-size:11px}.difficulty strong{font-size:23px}}

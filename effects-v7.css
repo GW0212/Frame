@@ -1,0 +1,43 @@
+/* FRAME! v7 | Pure CSS motion. No overlay intercepts pointer interaction. */
+.status-line[hidden]{display:none!important}
+:root{--motion-ease:cubic-bezier(.22,1,.36,1);--motion-brown:#80543d}
+@media (hover:hover) and (pointer:fine){
+ button:not(:disabled){transition:transform .24s var(--motion-ease),box-shadow .24s ease,background-color .24s ease,border-color .24s ease,color .24s ease,filter .24s ease}
+ .nav-button:hover,.nav-icon:hover,.pause-button:hover,.footer-link:hover,.modal-action:hover,.other-game:hover,.button-secondary:hover,.modal-close:hover{transform:translateY(-3px);box-shadow:0 8px 19px rgba(96,62,39,.13)}
+ .nav-button:hover svg,.footer-link:hover svg,.other-game:hover .go{transform:translateX(2px)}
+ .difficulty:hover{transform:translateY(-6px) scale(1.018);border-color:#a97b57;box-shadow:0 15px 30px rgba(101,66,42,.19),inset 0 1px 0 #ffffffaa;filter:saturate(1.06)}
+ .difficulty:hover .diff-symbol{transform:translateY(-2px) rotate(-9deg) scale(1.18)}
+ .difficulty:hover .diff-footer{transform:scale(1.08)}
+ .count-btn:hover{transform:translateY(-2px);box-shadow:0 5px 13px rgba(94,57,35,.13)}
+ .start-button:hover,.button-main:hover,.next-button:hover{transform:translateY(-4px) scale(1.025);box-shadow:0 17px 35px rgba(99,62,38,.28);filter:brightness(1.07)}
+ .start-button:hover .start-icon{transform:scale(1.15)}
+ .brand:hover{transform:scale(1.035)}
+ .brand:hover .brand-mark{transform:rotate(0deg) scale(1.12)}
+ .feature-frame:hover{transform:translateY(-3px)!important;box-shadow:0 18px 40px rgba(115,78,53,.17)}
+ .feature-frame:hover img{transform:scale(1.045)}
+}
+button:active:not(:disabled){transform:translateY(1px) scale(.97)!important;filter:brightness(.98)}
+button:focus-visible{outline:3px solid #a77753;outline-offset:4px;box-shadow:0 0 0 6px #c49c7544}
+.nav-button svg,.footer-link svg,.other-game .go,.brand-mark,.diff-symbol,.diff-footer,.start-icon,.feature-frame img{transition:transform .35s var(--motion-ease)}
+.difficulty.selected{box-shadow:0 0 0 2px #a7754b,0 12px 28px rgba(103,67,43,.16)}
+.difficulty.selected .diff-symbol{animation:frame-select-pop .42s var(--motion-ease)}
+.count-btn.active{box-shadow:inset 0 0 0 1px #a77c5f,0 3px 8px rgba(96,56,38,.1)}
+@keyframes frame-select-pop{0%{transform:scale(.82)}65%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes frame-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes frame-fade{from{opacity:0}to{opacity:1}}
+@keyframes frame-soft-pulse{0%,100%{box-shadow:0 0 0 0 #b78d6200}50%{box-shadow:0 0 0 8px #b78d621f}}
+.screen-main:not(.hidden) .hero-copy{animation:frame-rise .55s both}
+.screen-main:not(.hidden) .hero-display{animation:frame-rise .7s .07s both}
+.screen-main:not(.hidden) .launch-panel{animation:frame-rise .7s .12s both}
+.screen-main:not(.hidden) .below-bar{animation:frame-fade .7s .23s both}
+.start-button{position:relative;isolation:isolate;overflow:hidden;animation:frame-soft-pulse 4.5s ease-in-out infinite}
+.start-button::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background:linear-gradient(105deg,transparent 30%,#ffffff35 50%,transparent 70%);transform:translateX(-130%);transition:transform .8s ease}
+.start-button > *{position:relative;z-index:1}
+@media(hover:hover) and (pointer:fine){.start-button:hover::after{transform:translateX(130%)}}
+.modal-backdrop:not(.hidden){animation:frame-fade .2s ease both}
+.modal-backdrop:not(.hidden) .modal{animation:frame-rise .3s var(--motion-ease) both}
+.finish-card{animation:frame-rise .44s var(--motion-ease) both}
+/* v25: 정답 공개 순간 포스터와 제목이 지연 없이 바로 표시됩니다. */
+.reveal-panel:not(.hidden) .reveal-inner{animation:none!important;opacity:1!important;transform:none!important}
+.countdown-number{font-variant-numeric:tabular-nums}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

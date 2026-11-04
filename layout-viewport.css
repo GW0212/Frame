@@ -1,0 +1,58 @@
+/* FRAME v5: desktop first, fit full main page in a single viewport. */
+:root { --header-h: 68px; }
+@media (min-width: 761px) {
+  .topbar { min-height: var(--header-h); height: var(--header-h); padding: 10px 28px; }
+  .topbar .brand { font-size: 26px; }
+  .brand-mark { flex-shrink: 0; }
+  .topbar .header-actions { right: 28px; }
+  .screen-main { max-width: 1180px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 12px 28px 10px; }
+  .main-layout { gap: 4px; }
+  .hero-copy h1 { font-size: clamp(25px, 3vw, 34px); letter-spacing: -1.4px; margin: 0 0 3px; line-height: 1.2; }
+  .status-line { padding: 3px 0 0; font-size: 11px; min-height: 22px; }
+  .hero-display { width: min(100%, 460px); padding: 0; margin: 6px auto 0; }
+  .feature-frame { padding: 5px; border-radius: 12px; box-shadow: 0 9px 25px #7d53391c; }
+  .frame-inner { border-radius: 8px; }
+  .launch-panel { margin: 10px auto 0; padding-top: 12px; max-width: 1020px; }
+  .section-head { margin: 0 0 11px; }
+  .section-head h2 { font-size: 19px; }
+  .difficulty-grid { gap: 12px; }
+  .difficulty { min-height: 131px; padding: 10px 12px; }
+  .diff-symbol { font-size: 20px; }
+  .difficulty strong { font-size: 22px; margin: 5px 0 2px; }
+  .diff-desc { font-size: 11px; line-height: 1.45; }
+  .diff-footer { margin: 6px 0 0; font-size: 12px; }
+  .launch-footer { gap: 9px; padding: 10px 0 9px; }
+  .round-choice { gap: 10px; }
+  .count-btn { padding: 7px 11px; }
+  .start-button { height: 49px; min-height: 49px; width: min(100%, 285px); }
+  .below-bar { padding: 8px 0 0; }
+}
+@media (min-width:761px) and (max-height: 800px) {
+  :root { --header-h: 59px; }
+  .screen-main { padding-top: 7px; padding-bottom: 4px; }
+  .hero-copy h1 { font-size: 29px; }
+  .hero-display { width: min(100%, 395px); margin-top: 3px; }
+  .feature-frame { padding: 4px; }
+  .launch-panel { margin-top: 8px; padding-top: 9px; }
+  .section-head { margin-bottom: 8px; }
+  .difficulty { min-height: 112px; padding: 8px; }
+  .difficulty strong { margin: 2px 0; font-size: 20px; }
+  .diff-symbol { font-size: 18px; }
+  .diff-desc { font-size: 10px; }
+  .diff-footer { margin-top: 5px; }
+  .launch-footer { gap: 7px; padding: 8px 0 7px; }
+  .start-button { height: 43px; min-height: 43px; }
+  .below-bar { padding-top: 7px; }
+}
+@media (min-width:761px) and (max-height: 670px) {
+  .hero-display { width: min(100%, 310px); }
+  .difficulty { min-height: 90px; }
+  .diff-desc { display:none; }
+  .launch-footer { flex-direction: row; justify-content: center; gap: 22px; }
+  .start-button { width: 220px; }
+}
+@media (max-width:760px) {
+  .topbar { min-height: 100px; }
+  .screen-main { padding-top: 18px; }
+  .hero-display { width: min(100%, 460px); }
+}

@@ -1,0 +1,4 @@
+/* FRAME! v9 — Three difficulty cards, centered on desktop and mobile */
+.difficulty-grid{grid-template-columns:repeat(3,minmax(0,1fr));max-width:920px;margin-inline:auto;width:100%}
+@media (max-width:760px){.difficulty-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.difficulty{min-width:0;padding:12px 6px}.difficulty strong{font-size:clamp(18px,5vw,25px)}.diff-desc{font-size:clamp(9px,2.5vw,11px);word-break:keep-all}.diff-symbol{font-size:22px}.diff-footer{font-size:11px;letter-spacing:1px}}
+@media (max-width:380px){.difficulty-grid{gap:6px}.difficulty{padding:10px 4px}.difficulty strong{font-size:18px}.diff-desc{font-size:9px}}

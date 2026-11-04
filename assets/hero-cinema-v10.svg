@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 440" role="img" aria-label="필름 카메라와 클래퍼보드가 놓인 영화 퀴즈 장면">
+<defs>
+<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#fbf5ef"/><stop offset="1" stop-color="#e9d4c1"/></linearGradient>
+<linearGradient id="copper" x2=".9" y2="1"><stop stop-color="#bf8f68"/><stop offset=".5" stop-color="#855234"/><stop offset="1" stop-color="#53301f"/></linearGradient>
+<linearGradient id="film" x2=".8" y2="1"><stop stop-color="#7b4a33"/><stop offset="1" stop-color="#321d18"/></linearGradient>
+<linearGradient id="sky" x2=".2" y2="1"><stop stop-color="#b5c0c2"/><stop offset=".45" stop-color="#e5b78c"/><stop offset="1" stop-color="#7f524c"/></linearGradient>
+<filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="13"/></filter>
+<filter id="smallShadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="2" dy="9" stdDeviation="9" flood-color="#69462e" flood-opacity=".25"/></filter>
+<pattern id="holes" width="48" height="26" patternUnits="userSpaceOnUse"><rect width="25" height="14" x="11" y="6" rx="3" fill="#f5dfc8"/></pattern>
+</defs>
+<rect width="1120" height="440" fill="url(#bg)"/>
+<circle cx="914" cy="64" r="185" fill="#fffaf2" opacity=".43"/>
+<circle cx="120" cy="345" r="210" fill="#ffffff" opacity=".32"/>
+<ellipse cx="558" cy="400" rx="390" ry="24" fill="#8c6448" opacity=".13" filter="url(#shadow)"/>
+<!-- film ribbon -->
+<g filter="url(#smallShadow)" transform="translate(480 112) rotate(-3)">
+<path d="M0 80 Q115 -10 238 20 T590 51 L590 231 Q412 198 273 228 T0 255Z" fill="url(#film)"/>
+<path d="M0 84 Q115 -6 238 24 T590 55 L590 79 Q410 42 275 74 T0 107Z" fill="url(#holes)"/>
+<path d="M0 233 Q115 140 238 174 T590 204 L590 228 Q410 192 275 225 T0 255Z" fill="url(#holes)"/>
+<g stroke="#ead9c9" stroke-width="5">
+<path d="M145 49V203M283 61V212M422 55V207"/>
+</g>
+<g>
+<path d="M15 114 Q80 55 137 75 V196 Q79 199 15 225Z" fill="#d0ad8b"/>
+<path d="M160 92L267 86V196L160 199Z" fill="url(#sky)"/>
+<path d="M302 86L408 77V201L302 194Z" fill="#948075"/>
+<path d="M437 75L561 82V193L437 197Z" fill="url(#sky)"/>
+<path d="M165 174l38-59 33 44 31-32v69H160Z" fill="#6f544e" opacity=".8"/>
+<circle cx="348" cy="127" r="25" fill="#f6d6af"/><path d="M302 174q43-43 106-2v29H302Z" fill="#4f5a58"/>
+<circle cx="485" cy="137" r="25" fill="#fff3e3" opacity=".6"/>
+<path d="M437 178L474 137 510 177l28-34 23 33v20H437Z" fill="#654d4d" opacity=".9"/>
+</g>
+</g>
+<!-- movie reel -->
+<g filter="url(#smallShadow)"><circle cx="195" cy="216" r="127" fill="url(#copper)"/><circle cx="195" cy="216" r="108" fill="#e8c5a5"/><circle cx="195" cy="216" r="89" fill="#6d422d"/><g fill="#ecd0b7"><ellipse cx="195" cy="153" rx="23" ry="42"/><ellipse cx="254" cy="192" rx="23" ry="42" transform="rotate(72 254 192)"/><ellipse cx="230" cy="266" rx="23" ry="42" transform="rotate(144 230 266)"/><ellipse cx="158" cy="264" rx="23" ry="42" transform="rotate(216 158 264)"/><ellipse cx="140" cy="190" rx="23" ry="42" transform="rotate(288 140 190)"/></g><circle cx="195" cy="216" r="22" fill="#7f4f36"/><circle cx="195" cy="216" r="9" fill="#d4ae8b"/></g>
+<!-- clapperboard -->
+<g transform="translate(320 172) rotate(-10)" filter="url(#smallShadow)"><rect x="0" y="50" rx="15" width="240" height="200" fill="url(#film)" stroke="#a57755" stroke-width="6"/><rect x="0" y="20" width="240" height="52" rx="7" fill="#3c2720"/><path d="M4 20h30L5 68H0Zm64 0h34L71 68H38Zm69 0h34l-31 48h-35Zm68 0h31l-28 48h-35Z" fill="#fff3e4"/><rect x="32" y="95" width="176" height="116" rx="12" fill="#e2c4a6" opacity=".13"/><g fill="#e7c5a5" transform="translate(96 112)"><rect width="21" height="21" rx="5" transform="rotate(-12)"/><rect x="25" width="21" height="21" rx="5" transform="rotate(-12 35 10)"/><rect x="2" y="25" width="21" height="21" rx="5" transform="rotate(-12 12 35)"/><rect x="28" y="25" width="21" height="21" rx="5" transform="rotate(-12 38 35)"/></g><text x="120" y="191" font-size="30" font-family="Arial,sans-serif" font-weight="900" text-anchor="middle" fill="#f8e7d3">FRAME.</text></g>
+<!-- little ticket -->
+<g transform="translate(800 287) rotate(11)" filter="url(#smallShadow)"><rect width="208" height="90" rx="15" fill="#fef9f1" stroke="#b99071" stroke-width="4"/><path d="M49 0v90M157 0v90" stroke="#bc9475" stroke-dasharray="7 5"/><path d="m90 27 39 18-39 18Z" fill="#8e5c3b"/></g>
+<g fill="#ad7b55" opacity=".65"><circle cx="80" cy="61" r="5"/><circle cx="960" cy="342" r="4"/><circle cx="1076" cy="86" r="5"/></g>
+</svg>

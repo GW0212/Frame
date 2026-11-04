@@ -1,0 +1,45 @@
+/* FRAME! v26 — requested cleanup; appended last to prevent earlier theme overrides. */
+/* All three category choices have identical resting appearance; click navigates immediately. */
+.screen-main .category-start.category-all{
+  color:#67412c!important;
+  background:linear-gradient(160deg,#fffaf5,#f2e8dd)!important;
+  border-color:#d9bda4!important;
+  box-shadow:0 8px 21px rgba(99,62,38,.10)!important;
+}
+.screen-main .category-start.category-all .category-symbol{
+  background:#a8795119!important;
+}
+.screen-main .category-start.category-all:hover,
+.screen-main .category-start.category-all:focus-visible{
+  border-color:#ad7855!important;
+  box-shadow:0 15px 29px rgba(99,62,38,.19)!important;
+}
+/* No layout slot is left for the removed helper lines. */
+.screen-main .home-summary,.screen-settings .settings-tip{display:none!important;}
+@media (min-width:761px){
+  .screen-settings{
+    padding-top:10px!important;
+    padding-bottom:14px!important;
+    min-height:0!important;
+  }
+  .screen-settings .settings-wrap{
+    justify-content:flex-start!important;
+    align-items:center!important;
+    min-height:0!important;
+    margin-top:0!important;
+    padding-top:0!important;
+  }
+  .screen-settings .settings-top{
+    margin:0 auto 9px!important;
+    padding:0!important;
+  }
+  .screen-settings .settings-emblem{margin-top:0!important;}
+  .screen-settings .launch-panel{
+    margin-top:11px!important;
+  }
+}
+/* Preserve the one-viewport mobile settings layout, without adding a bottom helper line. */
+@media(max-width:760px){
+  .screen-settings .settings-top{margin-top:0!important;}
+  .screen-settings .settings-tip{display:none!important;}
+}

@@ -1,0 +1,25 @@
+FRAME! v42 — 이미지 파일 교체 안내
+=======================================
+
+[중요] 새 ZIP에는 WebP 이미지가 없습니다.
+이미 압축을 풀었던 기존 폴더에 덮어 풀면, *오래된 WebP 파일이 자동 삭제되지 않습니다*.
+반드시 새 폴더에 압축을 풀어 주세요. 또는 기존 movies 폴더를 먼저 삭제하세요.
+
+GitHub에 반영할 때
+1. 기존 GitHub 저장소의 movies 폴더를 백업한 후 삭제합니다.
+2. 이 ZIP의 movies 폴더 전체를 복사합니다.
+3. 이 ZIP의 index.html, catalog-v27.js, poster-seed-v22.js, app.js와
+   tools/build_manifest.py 및 .github/workflows/pages.yml을 반영합니다.
+4. Commit -> Push 하고 GitHub Pages 배포 완료 후 접속합니다.
+
+[전수검사 결과]
+- WebP 파일명: 0개
+- JPEG 포맷: 764개 (jpg/jpeg)
+- PNG 포맷: 30개
+- 영화: 276편, 장면: 518개, 포스터: 276개
+- 귀공자 포스터: movies/한국 영화/귀공자/포스터.jpg
+- 국제시장 어려움 장면: movies/한국 영화/국제시장/어려움/장면.jpg
+- 127시간 포스터: movies/외국 영화/127시간/포스터.jpg
+- 7번 방의 선물 포스터: movies/한국 영화/7번 방의 선물/포스터.jpg
+
+검사는 아래 ZIP의 내부 파일까지 다시 읽어 수행합니다.

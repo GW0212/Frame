@@ -1,0 +1,49 @@
+/* FRAME! v35 — Safari-safe poster rail, stable logo and sound-trigger affordance.
+   Keep after all previous styles. Does not change the carousel speed (52s). */
+.poster-marquee-track {
+  top:0!important;
+  height:100%!important;
+  align-items:center!important;
+  transform:translate3d(0,0,0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  will-change:transform;
+}
+@keyframes framePosterScroll {
+  from { transform:translate3d(0,0,0); }
+  to   { transform:translate3d(-50%,0,0); }
+}
+@media(max-width:760px), (hover:none), (pointer:coarse){
+  /* iOS keeps a synthetic :hover after a tap. Never pause because of hover. */
+  .screen-main .poster-marquee-frame:not(.lightbox-open) .poster-marquee-track{
+    animation-play-state:running!important;
+  }
+  .screen-main .poster-marquee-frame.lightbox-open .poster-marquee-track{
+    animation-play-state:paused!important;
+  }
+  #logoBtn,#logoBtn *, .topbar .brand, .topbar .brand-mark {
+    -webkit-user-select:none!important;
+    user-select:none!important;
+    -webkit-touch-callout:none!important;
+    -webkit-tap-highlight-color:transparent!important;
+    -webkit-user-drag:none!important;
+  }
+  .topbar #logoBtn {
+    transform:translate3d(-50%,-50%,0)!important;
+    animation:none!important;
+    transition:none!important;
+    touch-action:manipulation!important;
+    outline-offset:3px;
+  }
+  .topbar #logoBtn:hover, .topbar #logoBtn:active,
+  .topbar #logoBtn:focus:not(:focus-visible) {
+    transform:translate3d(-50%,-50%,0)!important;
+    filter:none!important;
+  }
+  .topbar #logoBtn .brand-mark, .topbar #logoBtn:hover .brand-mark,
+  .topbar #logoBtn:active .brand-mark{
+    transition:none!important;
+    animation:none!important;
+    transform:scale(.78)!important;
+  }
+}

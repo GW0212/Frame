@@ -1,0 +1,122 @@
+/* FRAME! v30: compact mobile game media, aligned setup header, responsive links. */
+@media(max-width:760px){
+  /* Title and return button share the same horizontal baseline in setup. */
+  .screen-settings .settings-wrap{
+    position:relative!important;
+    padding-top:0!important;
+    justify-content:flex-start!important;
+    align-items:stretch!important;
+  }
+  .screen-settings .settings-back{
+    position:absolute!important;
+    top:0!important;
+    left:0!important;
+    z-index:5!important;
+    min-height:38px!important;
+    height:38px!important;
+    touch-action:manipulation;
+  }
+  .screen-settings .settings-top{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0 auto clamp(11px,2svh,18px)!important;
+    padding:0!important;
+  }
+  .screen-settings .settings-top h1{
+    display:block!important;
+    font-size:clamp(21px,5.4vw,27px)!important;
+    line-height:38px!important;
+    min-height:38px!important;
+    height:38px!important;
+    margin:0 auto!important;
+    padding:0!important;
+    text-align:center!important;
+  }
+  .screen-settings .category-selection-label{
+    margin:clamp(7px,1.2svh,12px) auto 0!important;
+  }
+  .screen-settings .launch-panel{
+    margin-top:0!important;
+  }
+  /* Media fits its imagery rather than stretching to consume the whole viewport. */
+  .screen-game .game-stage{
+    flex:1 1 auto!important;
+    justify-content:flex-start!important;
+    min-height:0!important;
+  }
+  .screen-game .game-visual{
+    flex:0 0 auto!important;
+    width:100%!important;
+    height:min(59vw,34svh,330px)!important;
+    min-height:0!important;
+    max-height:unset!important;
+    aspect-ratio:auto!important;
+    margin:0 auto!important;
+  }
+  .screen-game[data-stage="guess"] .game-visual{
+    height:min(65vw,38svh,330px)!important;
+  }
+  .screen-game[data-stage="reveal"] .game-visual{
+    height:min(79vw,42svh,360px)!important;
+  }
+  .screen-game .scene-panel,
+  .screen-game .guess-panel,
+  .screen-game .reveal-panel{
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+  }
+  .screen-game .scene-panel #sceneImage{
+    width:100%!important;
+    height:100%!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
+  .screen-game .stage-heading{
+    min-height:0!important;
+    margin:clamp(5px,1svh,10px) 0 clamp(7px,1.4svh,13px)!important;
+  }
+  .screen-game .stage-bottom{
+    flex:0 0 auto!important;
+    margin:clamp(6px,1svh,10px) 0 0!important;
+    min-height:40px!important;
+  }
+  /* Reveal image should feel prominent without the enormous fixed beige panels. */
+  .screen-game[data-stage="reveal"] .reveal-inner{
+    width:100%!important;
+    height:100%!important;
+    align-items:center!important;
+    justify-content:center!important;
+    padding:7px 11px!important;
+    gap:clamp(10px,3vw,17px)!important;
+    box-sizing:border-box!important;
+  }
+  .screen-game[data-stage="reveal"] .poster-slot{
+    flex:0 1 46%!important;
+    width:auto!important;
+    height:min(74vw,37svh,305px)!important;
+    max-height:calc(100% - 12px)!important;
+    max-width:47%!important;
+    aspect-ratio:2/3!important;
+    box-sizing:border-box!important;
+  }
+  .screen-game .answer-content{align-self:center!important;}
+  .screen-game .reveal-pattern{pointer-events:none!important;}
+  .topbar #logoBtn,.screen-main #devBtn{
+    cursor:pointer!important;
+    touch-action:manipulation!important;
+    -webkit-tap-highlight-color:transparent!important;
+    pointer-events:auto!important;
+  }
+  .screen-main .below-bar{position:relative!important;z-index:5!important;}
+  .screen-main #devBtn{position:relative!important;z-index:6!important;min-height:42px!important;padding:8px 14px!important;}
+}
+@media(max-width:760px) and (max-height:630px){
+  .screen-game .game-visual{height:min(53vw,30svh,250px)!important;}
+  .screen-game[data-stage="reveal"] .game-visual{height:min(66vw,35svh,290px)!important;}
+  .screen-game[data-stage="reveal"] .poster-slot{height:min(62vw,30svh,240px)!important;}
+}

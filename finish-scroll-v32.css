@@ -1,0 +1,29 @@
+/* FRAME! v32: PC results >= 21 have 20-card viewport and inner scrolling. */
+@media (min-width:761px) {
+  .screen-finish.finish-desktop-scroll .finish-poster-grid {
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    grid-template-rows:none!important;
+    grid-auto-rows:var(--finish-cell-height,140px)!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    overscroll-behavior-y:contain;
+    scrollbar-gutter:stable;
+    align-content:start!important;
+    justify-content:stretch!important;
+    -webkit-overflow-scrolling:touch;
+    padding-right:3px;
+  }
+  .screen-finish.finish-desktop-scroll .finish-poster-card {
+    height:100%!important;
+    max-height:100%!important;
+  }
+}
+/* Keep ordinary 10/20 results inside the viewport, with readable posters. */
+@media (min-width:761px) {
+  .screen-finish:not(.finish-desktop-scroll) .finish-poster-grid {
+    overflow:hidden!important;
+  }
+}
+
+/* v33: center result actions after removing the cumulative count label. */
+.finish-gallery-bottom {justify-content:center!important;}

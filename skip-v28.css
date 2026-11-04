@@ -1,0 +1,15 @@
+/* v28: scene / guess Skip action */
+.screen-game .stage-bottom .skip-button {
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-width:124px;min-height:42px;padding:10px 22px;
+  background:#825338;color:#fffaf4;border:1px solid #825338;border-radius:999px;
+  font-weight:800;font-size:13px;letter-spacing:.02em;
+  box-shadow:0 6px 15px rgba(91,57,34,.15);
+  transition:background .18s, transform .18s, box-shadow .18s;
+}
+.screen-game .stage-bottom .skip-button:hover{background:#a16c4b;transform:translateY(-2px);box-shadow:0 9px 20px rgba(91,57,34,.22)}
+.screen-game .stage-bottom .skip-button:active{transform:translateY(0)}
+.screen-game .stage-bottom .skip-button svg{width:16px;height:16px}
+.screen-game .stage-bottom .skip-button.hidden,.screen-game .stage-bottom #stageHint.hidden{display:none!important}
+@media(max-width:760px){.screen-game .stage-bottom .skip-button{min-height:40px;padding:8px 18px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.screen-game .stage-bottom .skip-button{transition:none}}

@@ -1,0 +1,116 @@
+/* FRAME! v40 — clean, fully centered difficulty cards. No checkmarks or action text. */
+.screen-settings .difficulty-grid {
+  width:100%!important;max-width:945px!important;
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:14px!important;align-items:stretch!important;
+}
+.screen-settings .difficulty.tier-card {
+  --tier-accent:#4f8568;--tier-wash:#eaf4ed;
+  position:relative!important;box-sizing:border-box!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  justify-content:center!important;gap:8px!important;
+  padding:15px 15px 14px!important;min-height:184px!important;height:auto!important;
+  min-width:0!important;text-align:center!important;
+  color:#39281f!important;background:#fffdfa!important;
+  border:1px solid #e3d6c9!important;border-radius:18px!important;
+  box-shadow:0 5px 18px rgba(77,49,31,.045)!important;
+  isolation:isolate!important;overflow:hidden!important;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background-color .2s ease!important;
+}
+.screen-settings .difficulty.tier-card[data-level="중간"]{--tier-accent:#a5812f;--tier-wash:#fff7e2}
+.screen-settings .difficulty.tier-card[data-level="어려움"]{--tier-accent:#b65a4f;--tier-wash:#fceeea}
+.screen-settings .difficulty.tier-card::before {
+  content:""!important;position:absolute!important;inset:0 auto auto 50%!important;
+  width:56px!important;height:3px!important;border-radius:0 0 5px 5px!important;
+  background:var(--tier-accent)!important;opacity:.6!important;
+  transform:translateX(-50%)!important;filter:none!important;box-shadow:none!important;
+  pointer-events:none!important;
+}
+.screen-settings .difficulty.tier-card::after{content:none!important;display:none!important}
+.screen-settings .difficulty.tier-card.selected {
+  background:linear-gradient(170deg,#fffdfa 8%,var(--tier-wash) 115%)!important;
+  border:1.5px solid var(--tier-accent)!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--tier-accent) 12%,transparent),0 10px 24px rgba(76,48,28,.07)!important;
+}
+.screen-settings .difficulty.tier-card.selected::before{opacity:1!important;width:78px!important}
+.screen-settings .tier-top,
+.screen-settings .tier-body,
+.screen-settings .tier-bottom {
+  width:100%!important;min-width:0!important;display:flex!important;
+  flex-direction:column!important;align-items:center!important;
+  justify-content:center!important;text-align:center!important;
+  gap:0!important;margin:0!important;
+}
+.screen-settings .tier-top {min-height:14px!important;flex:0 0 auto!important;}
+.screen-settings .tier-number {
+  display:inline-flex!important;align-items:baseline!important;justify-content:center!important;
+  color:var(--tier-accent)!important;font-size:10px!important;font-weight:900!important;
+  letter-spacing:.07em!important;line-height:1.1!important;
+}
+.screen-settings .tier-number span {
+  font-size:9px!important;color:#a89b8d!important;letter-spacing:.1em!important;margin-left:6px!important;
+}
+.screen-settings .tier-body{flex:1 1 auto!important;gap:8px!important;}
+.screen-settings .tier-icon {
+  display:grid!important;place-items:center!important;
+  width:48px!important;height:48px!important;flex:0 0 48px!important;
+  border-radius:14px!important;background:var(--tier-wash)!important;
+  color:var(--tier-accent)!important;border:1px solid color-mix(in srgb,var(--tier-accent) 12%,#fff)!important;
+  margin:0 auto!important;
+}
+.screen-settings .tier-icon svg{display:block!important;width:27px!important;height:27px!important;}
+.screen-settings .tier-text{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important;width:100%!important;min-width:0!important;text-align:center!important;}
+.screen-settings .tier-card .tier-name {
+  display:block!important;margin:0!important;
+  font-size:26px!important;line-height:1.1!important;font-weight:900!important;
+  letter-spacing:-.055em!important;color:#39281f!important;text-align:center!important;
+}
+.screen-settings .tier-card.selected .tier-name{color:var(--tier-accent)!important}
+.screen-settings .tier-description {
+  display:block!important;font-size:11px!important;line-height:1.4!important;
+  color:#958375!important;text-align:center!important;white-space:normal!important;
+  overflow-wrap:keep-all!important;word-break:keep-all!important;
+}
+.screen-settings .tier-bottom {
+  flex:0 0 auto!important;padding:7px 0 0!important;
+  min-height:21px!important;border-top:1px solid #ece3d9!important;
+}
+.screen-settings .tier-stars {
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  font-size:16px!important;line-height:1!important;letter-spacing:.5px!important;white-space:nowrap!important;
+}
+.screen-settings .tier-stars-on{color:var(--tier-accent)!important}
+.screen-settings .tier-stars-off{color:#d7cabe!important}
+@media(hover:hover) and (pointer:fine){
+ .screen-settings .difficulty.tier-card:hover{transform:translateY(-3px)!important;border-color:var(--tier-accent)!important;box-shadow:0 12px 25px rgba(83,56,38,.11)!important;filter:none!important}
+ .screen-settings .difficulty.tier-card:active{transform:translateY(-1px)!important}
+}
+.screen-settings .difficulty.tier-card:focus-visible{outline:3px solid var(--tier-accent)!important;outline-offset:3px!important}
+@media(max-width:760px){
+ .screen-settings .difficulty-grid{gap:clamp(6px,2vw,10px)!important;max-width:100%!important}
+ .screen-settings .difficulty.tier-card{
+   min-height:122px!important;height:clamp(122px,19dvh,155px)!important;
+   padding:9px 5px 9px!important;gap:4px!important;border-radius:14px!important;
+ }
+ .screen-settings .tier-top{min-height:11px!important;}
+ .screen-settings .tier-number{font-size:8px!important;}
+ .screen-settings .tier-number span{display:none!important;}
+ .screen-settings .tier-body{gap:3px!important;}
+ .screen-settings .tier-icon{width:30px!important;height:30px!important;flex:0 0 30px!important;border-radius:9px!important;}
+ .screen-settings .tier-icon svg{width:19px!important;height:19px!important;}
+ .screen-settings .tier-text{gap:2px!important;}
+ .screen-settings .tier-card .tier-name{font-size:clamp(17px,5vw,22px)!important;white-space:nowrap!important;}
+ .screen-settings .tier-description{font-size:clamp(8px,2.35vw,10px)!important;line-height:1.25!important;}
+ .screen-settings .tier-bottom{min-height:14px!important;padding-top:4px!important;}
+ .screen-settings .tier-stars{font-size:clamp(12px,3.3vw,15px)!important;}
+}
+@media(max-width:760px) and (max-height:690px){
+ .screen-settings .difficulty.tier-card{min-height:112px!important;height:112px!important;padding:6px 5px!important;gap:2px!important;}
+ .screen-settings .tier-icon{width:25px!important;height:25px!important;flex-basis:25px!important;}
+ .screen-settings .tier-icon svg{width:16px!important;height:16px!important;}
+ .screen-settings .tier-card .tier-name{font-size:17px!important;}
+ .screen-settings .tier-description{font-size:8px!important;}
+ .screen-settings .tier-bottom{padding-top:3px!important;}
+}
+@media(prefers-reduced-motion:reduce){.screen-settings .difficulty.tier-card{transition:none!important}}

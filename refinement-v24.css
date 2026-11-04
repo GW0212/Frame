@@ -1,0 +1,68 @@
+/* FRAME v24: result gallery, difficulty palettes, compact setup */
+:root{--difficulty-easy:#4b8a61;--difficulty-easy-bg:#edf7ee;--difficulty-medium:#b58a22;--difficulty-medium-bg:#fff8df;--difficulty-hard:#bd574c;--difficulty-hard-bg:#fff0ed}
+/* Only difficulty controls are recolored. The ivory/walnut website theme stays intact. */
+.difficulty[data-level="쉬움"]{--level-accent:var(--difficulty-easy);--level-bg:var(--difficulty-easy-bg)}
+.difficulty[data-level="중간"]{--level-accent:var(--difficulty-medium);--level-bg:var(--difficulty-medium-bg)}
+.difficulty[data-level="어려움"]{--level-accent:var(--difficulty-hard);--level-bg:var(--difficulty-hard-bg)}
+.difficulty{border-color:color-mix(in srgb,var(--level-accent) 26%,#efe3d7)!important}
+.difficulty .diff-symbol,.difficulty .star-on,.difficulty .diff-footer .star-on{color:var(--level-accent)!important}
+.difficulty.selected{border-color:var(--level-accent)!important;background:linear-gradient(145deg,#fffdfa,var(--level-bg))!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--level-accent) 44%,transparent),0 11px 25px #65472c16!important}
+.difficulty.selected strong{color:var(--level-accent)!important}
+.game-meta .level-label[data-level="쉬움"],#finishLevel[data-level="쉬움"]{background:var(--difficulty-easy-bg)!important;border-color:#b5d8bd!important;color:#2c6c41!important}
+.game-meta .level-label[data-level="중간"],#finishLevel[data-level="중간"]{background:var(--difficulty-medium-bg)!important;border-color:#ebce81!important;color:#85620a!important}
+.game-meta .level-label[data-level="어려움"],#finishLevel[data-level="어려움"]{background:var(--difficulty-hard-bg)!important;border-color:#ebada4!important;color:#a5392d!important}
+.game-badges{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;flex-wrap:nowrap!important}
+.game-badges>.game-category-label,.game-badges>.level-label{margin:0!important;white-space:nowrap!important}
+/* Remove the excess block above the READY FOR YOUR QUIZ / icon content. */
+@media(min-width:761px){
+ .screen-settings{padding-top:8px!important;min-height:0!important}
+ .screen-settings .settings-wrap{justify-content:flex-start!important}
+ .screen-settings .settings-top{margin:2px auto 8px!important;padding-top:0!important}
+ .screen-settings .settings-emblem{margin-top:0!important}
+ .screen-settings .launch-panel{margin-top:12px!important}
+}
+@media(max-width:760px){
+ .screen-settings .settings-wrap{justify-content:center!important}
+ .screen-settings .settings-top{margin-top:0!important}
+}
+/* The finish page contains the complete episode's movie posters, not a fixed-height credits card. */
+.screen-finish{display:flex!important;align-items:flex-start!important;justify-content:center!important;min-height:0!important;padding:24px 18px 40px!important}
+.screen-finish.hidden{display:none!important}
+.finish-gallery-card{max-width:1020px!important;width:100%!important;padding:28px clamp(15px,3vw,35px)!important;background:#f6ece2!important;border:1px solid #dfc7b2!important;border-radius:22px!important;box-shadow:0 16px 48px #75503a18!important;text-align:center}
+.finish-gallery-heading{margin-bottom:20px}
+.finish-gallery-kicker{display:block;font-size:10px;letter-spacing:.22em;font-weight:800;color:#a67953}
+.finish-gallery-heading h2{font-size:clamp(25px,3.6vw,37px);letter-spacing:-.045em;color:#452d20;margin:8px 0 6px;line-height:1.25}
+.finish-gallery-heading p{margin:0 0 13px;color:#947866;font-size:13px}
+.finish-gallery-badges{display:flex;justify-content:center;align-items:center;gap:7px;flex-wrap:wrap}
+.finish-gallery-badges>span{display:inline-flex;align-items:center;justify-content:center;border:1px solid #dfc9b6;border-radius:999px;background:#fff9f3;color:#754d37;padding:7px 13px;font-size:12px;font-weight:800;line-height:1.25}
+.finish-gallery-badges>span strong{margin-left:3px}
+.finish-poster-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;text-align:center}
+.finish-poster-card{min-width:0;border:1px solid #e3d1bf;border-radius:15px;background:#fffaf5;padding:9px 9px 11px;box-shadow:0 5px 16px #6146320d;transition:transform .2s ease,box-shadow .2s ease}
+@media(hover:hover){.finish-poster-card:hover{transform:translateY(-3px);box-shadow:0 11px 27px #6d4e3622}}
+.finish-poster-image{aspect-ratio:2/3;background:#e6d8c9;border-radius:10px;overflow:hidden;display:grid;place-items:center}
+.finish-poster-image img{width:100%;height:100%;object-fit:cover;display:block}
+.finish-poster-empty{font-size:12px;color:#9a806b}
+.finish-poster-info{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding-top:10px}
+.finish-poster-number{font-family:inherit;font-size:10px;letter-spacing:.06em;color:#aa8467;font-weight:800}
+.finish-poster-info strong{font-size:clamp(12px,1.28vw,15px);line-height:1.45;word-break:keep-all;overflow-wrap:anywhere;color:#3f2b20}
+.finish-gallery-bottom{border-top:1px solid #e3cab7;margin-top:25px;padding-top:19px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.finish-gallery-bottom>span{color:#967863;font-size:12px}
+.finish-gallery-bottom>span strong{color:#513726}
+.finish-gallery-bottom .finish-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0}
+@media(max-width:900px){.finish-poster-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:760px){
+ .screen-finish{padding:10px 9px max(12px,env(safe-area-inset-bottom))!important;overflow:auto!important;-webkit-overflow-scrolling:touch!important;align-items:flex-start!important}
+ .screen-finish .finish-gallery-card{max-height:none!important;overflow:visible!important;padding:15px 10px!important;border-radius:17px!important}
+ .finish-gallery-heading{margin-bottom:13px}
+ .finish-gallery-heading h2{font-size:23px;margin:4px 0 3px}
+ .finish-gallery-heading p{font-size:11px;margin-bottom:10px}
+ .finish-gallery-badges>span{font-size:10px;padding:5px 9px}
+ .finish-poster-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .finish-poster-card{padding:7px 7px 9px;border-radius:12px}
+ .finish-poster-info{gap:4px;padding-top:6px}
+ .finish-poster-info strong{font-size:12px}
+ .finish-gallery-bottom{justify-content:center;gap:12px;margin-top:15px;padding-top:13px}
+ .finish-gallery-bottom .finish-actions{width:100%}
+ .finish-gallery-bottom .finish-actions button{font-size:11px}
+}
+@media(min-width:761px) and (max-width:1199px){.finish-poster-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
