@@ -1,0 +1,15 @@
+/* FRAME! v47 keyboard navigation highlights only the arrow-selected item. */
+@media (hover:hover) and (pointer:fine){
+  #settingsScreen .difficulty.keyboard-nav-target,
+  #settingsScreen .count-btn.keyboard-nav-target,
+  #settingsScreen #startBtn.keyboard-nav-target{
+    outline:3px solid #76523b!important;
+    outline-offset:4px!important;
+    box-shadow:0 0 0 7px rgba(188,145,105,.18),0 12px 24px rgba(76,48,31,.12)!important;
+  }
+}
+#settingsScreen .difficulty.keyboard-nav-target,
+#settingsScreen .count-btn.keyboard-nav-target,
+#settingsScreen #startBtn.keyboard-nav-target{
+  scroll-margin:12px;
+}

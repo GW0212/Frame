@@ -22,6 +22,12 @@
   const scenePreloadCache=new Map();
   const posterPreloadCache=new Map();
   let activePosterUrl='';
+  // Settings previews are not committed to the shuffle history until Start is pressed.
+  let preparedLaunch=null;
+  let launchPreviewId=0;
+  let launchBusy=false;
+  let settingsNavRow=0;
+  let settingsNavActive=false;
   let lastPosterTitles='';
   const scrub = s => String(s || '').replace(/[<>]/g, '');
   function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -137,7 +143,7 @@
     items[n].focus({preventScroll:true});
   }
   function resume(){if(!paused)return;playSfx('resume');paused=false;resumeStageAudio();modalClose(true);lastTick=performance.now();if(stage==='scene'||stage==='guess'||stage==='reveal')loopId=requestAnimationFrame(tick);}
-  function goHome(){stopStageAudio();cancelAnimationFrame(loopId);sceneLoadToken++;stage='idle';paused=false;modalAutoPaused=false;modalClose(true);showScreen('mainScreen');}
+  function goHome(){preparedLaunch=null;launchPreviewId++;clearLaunchNavigation();stopStageAudio();cancelAnimationFrame(loopId);sceneLoadToken++;stage='idle';paused=false;modalAutoPaused=false;modalClose(true);showScreen('mainScreen');}
   function categoryMatches(item){return selectedCategory==='종합'||item.category===selectedCategory;}
   function shuffle(items){const a=items.slice();for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
   // v34 - persistent shuffle-bag, independent for each category and difficulty.
@@ -167,14 +173,14 @@
             ...mixed.filter(k=>!selected.has(k)&&recent.has(k)),
             ...mixed.filter(k=>selected.has(k))];
   }
-  function drawFreshRound(pool,requested,category,level){
+  function drawFreshRound(pool,requested,category,level,commit=true){
     const drawCount=Math.min(pool.length,Math.max(0,requested));
     if(!drawCount)return [];
     const byKey=new Map(pool.map(movie=>[sceneKey(movie),movie]));
     const keys=[...byKey.keys()];
     const valid=new Set(keys);
     const scope=`${category}::${level}`;
-    const history=readDrawHistory();
+    const history={...readDrawHistory()};
     const saved=history[scope];
     const state=saved && typeof saved==='object' ? saved : {};
     let remaining=Array.isArray(state.remaining)
@@ -196,17 +202,29 @@
       const [key]=remaining.splice(nextIndex,1);
       chosen.push(key);chosenSet.add(key);
     }
-    history[scope]={known:keys,remaining,lastRound:chosen};
-    saveDrawHistory(history);
-    return chosen.map(key=>byKey.get(key)).filter(Boolean);
+    const record={known:keys,remaining,lastRound:chosen};
+    history[scope]=record;
+    if(commit)saveDrawHistory(history);
+    const items=chosen.map(key=>byKey.get(key)).filter(Boolean);
+    return commit?items:{items,scope,record};
   }
+  const decodedSceneImages=new Map();
   function preloadScene(url){
     if(!url)return Promise.resolve(false);
     if(scenePreloadCache.has(url))return scenePreloadCache.get(url);
     const promise=new Promise(resolve=>{
       const im=new Image();let settled=false;
       const finish=ok=>{if(settled)return;settled=true;resolve(ok);};
-      im.onload=()=>{if(im.decode){im.decode().then(()=>finish(true),()=>finish(true));}else finish(true);};
+      im.onload=()=>{
+        const loaded=()=>{
+          decodedSceneImages.delete(url);
+          decodedSceneImages.set(url,im);
+          while(decodedSceneImages.size>3) decodedSceneImages.delete(decodedSceneImages.keys().next().value);
+          finish(true);
+        };
+        if(im.decode) im.decode().then(loaded,loaded);
+        else loaded();
+      };
       im.onerror=()=>finish(false);
       im.src=url;
       if(im.complete && im.naturalWidth>0)finish(true);
@@ -253,20 +271,118 @@
     // 숨겨진 정답 패널의 실제 DOM 이미지까지 미리 디코딩하도록 요청합니다.
     if(typeof img.decode==='function')img.decode().catch(()=>{});
   }
+  function launchSignature(){
+    return [selectedCategory,selectedLevel,String(roundLimit),catalog.length].join('::');
+  }
+  function prepareLaunchRound(){
+    // Preview once per settings change; no game is counted as played yet.
+    const id=++launchPreviewId;
+    preparedLaunch=null;
+    const pool=catalog.filter(m=>m.level===selectedLevel&&categoryMatches(m));
+    if(!pool.length)return;
+    const desired=roundLimit==='all'?pool.length:Number(roundLimit);
+    const candidate=drawFreshRound(pool,desired,selectedCategory,selectedLevel,false);
+    if(!candidate.items.length)return;
+    const entry={signature:launchSignature(),...candidate,ready:null};
+    preparedLaunch=entry;
+    // Start loading and decoding at difficulty/category/count selection time.
+    // Warm the *actual* visible game image element while its screen is hidden.
+    // This avoids a second image decode when we switch from settings to game.
+    const sceneElement=$('sceneImage');
+    if(sceneElement && sceneElement.getAttribute('src')!==entry.items[0].scene){
+      sceneElement.src=entry.items[0].scene;
+    }
+    if(typeof sceneElement?.decode==='function')sceneElement.decode().catch(()=>{});
+    entry.ready=preloadScene(entry.items[0].scene);
+    preloadPoster(entry.items[0].poster);
+    if(entry.items.length>1){
+      // Defer the next scene to avoid competing with the first download.
+      entry.ready.then(()=>{if(id===launchPreviewId){preloadScene(entry.items[1].scene);preloadPoster(entry.items[1].poster);}});
+    }
+  }
+  function setLaunchNavigation(row,focus=true){
+    settingsNavRow=Math.max(0,Math.min(2,row));
+    const selected=settingsNavRow===0?qs(`.difficulty[data-level="${selectedLevel}"]`):
+      settingsNavRow===1?qs(`.count-btn[data-count="${roundLimit}"]`):$('startBtn');
+    qsa('#settingsScreen .difficulty, #settingsScreen .count-btn, #settingsScreen #startBtn')
+      .forEach(button=>button.classList.toggle('keyboard-nav-target',button===selected));
+    if(focus && selected && !selected.disabled)selected.focus({preventScroll:true});
+  }
+  function clearLaunchNavigation(){
+    settingsNavActive=false;
+    qsa('#settingsScreen .keyboard-nav-target').forEach(button=>button.classList.remove('keyboard-nav-target'));
+  }
+  function handleSettingsKeyboard(event){
+    if($('settingsScreen').classList.contains('hidden')||modal||
+      !$('noticeBackdrop').classList.contains('hidden')||
+      !$('posterLightbox').classList.contains('hidden'))return;
+    const key=event.key;
+    if(!['ArrowRight','ArrowLeft','ArrowUp','ArrowDown','Enter'].includes(key))return;
+    const tag=event.target?.tagName;
+    if(['INPUT','TEXTAREA','SELECT'].includes(tag))return;
+    const active=document.activeElement;
+    if(active?.classList?.contains('difficulty'))settingsNavRow=0;
+    else if(active?.classList?.contains('count-btn'))settingsNavRow=1;
+    else if(active===$('startBtn'))settingsNavRow=2;
+    if(key==='Enter'){
+      if(!settingsNavActive)return; // Preserve ordinary Tab + Enter behavior.
+      event.preventDefault();event.stopImmediatePropagation();
+      if(event.repeat)return;
+      if(settingsNavRow===2 && !$('startBtn').disabled)startGame();
+      else setLaunchNavigation(settingsNavRow);
+      return;
+    }
+    // Keep arrow keys from scrolling or triggering unrelated focused controls.
+    event.preventDefault();event.stopImmediatePropagation();
+    settingsNavActive=true;
+    if(key==='ArrowDown'){setLaunchNavigation(settingsNavRow+1);return;}
+    if(key==='ArrowUp'){setLaunchNavigation(settingsNavRow-1);return;}
+    const dir=key==='ArrowRight'?1:-1;
+    if(settingsNavRow===0){
+      const current=LEVELS.indexOf(selectedLevel);
+      const next=Math.max(0,Math.min(LEVELS.length-1,current+dir));
+      if(next!==current)chooseLevel(LEVELS[next]);
+    }else if(settingsNavRow===1){
+      const enabled=qsa('.count-btn').filter(btn=>!btn.disabled);
+      const current=enabled.findIndex(btn=>btn.dataset.count===String(roundLimit));
+      const next=Math.max(0,Math.min(enabled.length-1,(current<0?0:current)+dir));
+      const button=enabled[next];
+      if(button && roundLimit!==button.dataset.count){
+        roundLimit=button.dataset.count;
+        updateAllCount();
+        prepareLaunchRound();
+        playSfx('ui_select');
+      }
+    }
+    setLaunchNavigation(settingsNavRow);
+  }
   async function startGame(){
-    stopStageAudio();sceneLoadToken++;
+    if(launchBusy)return;
     const pool=catalog.filter(m=>m.level===selectedLevel&&categoryMatches(m));
     if(!pool.length){toast('이 난이도에는 아직 영화 장면이 없습니다.');return;}
-    // v34: use the unplayed pool first, then recycle only when exhausted.
-    queue=drawFreshRound(pool,roundLimit==='all'?pool.length:Number(roundLimit),selectedCategory,selectedLevel);
+    launchBusy=true;
+    stopStageAudio();const token=++sceneLoadToken;
+    // Use the already-decoded settings preview when available. Commit its
+    // shuffle-bag record *only now*, so browsing options never burns history.
+    const preview=preparedLaunch?.signature===launchSignature()?preparedLaunch:null;
+    if(preview){
+      queue=preview.items;
+      const history={...readDrawHistory()};
+      history[preview.scope]=preview.record;
+      saveDrawHistory(history);
+    }else{
+      queue=drawFreshRound(pool,roundLimit==='all'?pool.length:Number(roundLimit),selectedCategory,selectedLevel);
+    }
+    preparedLaunch=null;launchPreviewId++;
     index=0;paused=false;modalAutoPaused=false;modalClose(true);
     $('gameLevel').textContent=selectedLevel;$('gameLevel').dataset.level=selectedLevel;$('gameCategory').textContent=selectedCategory;$('gameTotal').textContent=queue.length;
-    // 첫 이미지가 로드되기 전에 3초 카운트다운이 진행되지 않게 한다.
-    const token=sceneLoadToken;
     const btn=$('startBtn');btn.disabled=true;
-    await Promise.all([preloadScene(queue[0].scene),preloadPoster(queue[0].poster)]);
-    btn.disabled=false;
+    // Do not wait for the answer poster: it has eight seconds to finish loading.
+    // Only the first scene must be decoded before its 3-second countdown starts.
+    try{await(preview?.ready||preloadScene(queue[0].scene));}
+    finally{btn.disabled=false;launchBusy=false;}
     if(token!==sceneLoadToken)return;
+    clearLaunchNavigation();
     playSfx('game_start');showScreen('gameScreen');$('gameScreen').focus({preventScroll:true});beginScene();
   }
   function setStage(name,seconds){stopStageAudio();cancelAnimationFrame(loopId);stage=name;$('gameScreen').dataset.stage=name;stageRemaining=seconds;lastTick=performance.now();$('scenePanel').classList.toggle('hidden',name!=='scene');$('guessPanel').classList.toggle('hidden',name!=='guess');$('revealPanel').classList.toggle('hidden',name!=='reveal');$('nextBtn').classList.toggle('hidden',name!=='reveal');$('skipBtn').classList.toggle('hidden',name!=='scene'&&name!=='guess');$('stageHint').classList.toggle('hidden',name!=='reveal');if(name==='scene'||name==='guess'||name==='reveal')loopId=requestAnimationFrame(tick);}
@@ -437,6 +553,8 @@
     if($('modePill'))$('modePill').textContent=MODES[selectedLevel];
     updateAllCount();
     showSettings();
+    clearLaunchNavigation();settingsNavRow=0;
+    prepareLaunchRound();
   }
 
 // Safari sometimes parks a CSS transform animation after reload/backgrounding.
@@ -513,7 +631,7 @@ function renderPosterMarquee(itemsOverride){
     posterLightboxReturnFocus=null;
   }
 
-  function chooseLevel(level){selectedLevel=level;updateAllCount();$('modePill').textContent=MODES[level];qsa('.difficulty').forEach(btn=>{const chosen=btn.dataset.level===level;btn.classList.toggle('selected',chosen);btn.setAttribute('aria-pressed',String(chosen));});playSfx('ui_select');}
+  function chooseLevel(level){selectedLevel=level;updateAllCount();$('modePill').textContent=MODES[level];qsa('.difficulty').forEach(btn=>{const chosen=btn.dataset.level===level;btn.classList.toggle('selected',chosen);btn.setAttribute('aria-pressed',String(chosen));});prepareLaunchRound();playSfx('ui_select');}
   function setup(){
     if ($('year')) $('year').textContent = new Date().getFullYear();
     updateSound();
@@ -528,7 +646,9 @@ function renderPosterMarquee(itemsOverride){
         }
       });
     });
-    qsa('.count-btn').forEach(btn=>btn.addEventListener('click',()=>{playSfx('ui_select');roundLimit=btn.dataset.count;qsa('.count-btn').forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-pressed',String(b===btn));});}));
+    qsa('.count-btn').forEach(btn=>btn.addEventListener('click',()=>{
+      playSfx('ui_select');roundLimit=btn.dataset.count;updateAllCount();prepareLaunchRound();
+    }));
     $('posterMarqueeTrack').addEventListener('click',event=>{
       const button=event.target.closest('button.poster-chip');
       if(button)openPosterLightbox(button);
@@ -595,6 +715,10 @@ function renderPosterMarquee(itemsOverride){
     $('skipBtn').onclick=skipStage;
     $('nextBtn').onclick=nextScene;$('replayBtn').onclick=startGame;$('finishHomeBtn').onclick=goHome;
     $('modalClose').onclick=()=>modalClose();$('modalBackdrop').onclick=e=>{if(e.target===$('modalBackdrop'))modalClose();};
+    // v47: Settings keyboard grid: Right×2, Down, Right, Down, Enter
+    // selects 어려움 / 20문제 and starts. Capture before native button handlers.
+    document.addEventListener('keydown',handleSettingsKeyboard,true);
+    $('settingsScreen').addEventListener('pointerdown',clearLaunchNavigation,{passive:true});
     // v45: During active gameplay, Enter belongs exclusively to stage controls.
     // Capture before native button activation: a focused header button (e.g.
     // '이외 게임') must never open as a side effect of skipping/revealing.
