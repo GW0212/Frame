@@ -41,3 +41,37 @@
  .modal:has(.games-list) .other-game{font-size:12px; padding:12px 34px;}
  .modal:has(.games-list) .other-game-icon{left:5px;width:30px;height:30px;}
 }
+
+/* FRAME v49 — short PC keyboard guide at the very bottom of Game Help */
+.help-pc-shortcuts {
+  margin-top: 18px;
+  padding: 15px 10px 2px;
+  border-top: 1px solid #e6d7c7;
+  text-align: center;
+  color: #76543c;
+  font-size: 12px;
+  line-height: 1.85;
+  word-break: keep-all;
+}
+.help-pc-shortcuts > strong { display: block; font-size: 12px; margin-bottom: 6px; color: #533827; }
+.help-pc-shortcuts p { margin: 3px 0; }
+.help-pc-shortcuts p > span { font-weight: 800; margin-right: 7px; }
+.help-pc-shortcuts kbd {
+  display: inline-block;
+  min-width: 19px;
+  padding: 0 4px;
+  margin: 0 2px;
+  border: 1px solid #e1cebb;
+  border-radius: 5px;
+  background: #fffaf5;
+  color: #7e553c;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.55;
+  box-shadow: 0 1px 0 #e9d9c9;
+}
+@media (max-width: 420px) {
+  .help-pc-shortcuts { font-size: 11px; padding-inline: 0; }
+  .help-pc-shortcuts kbd { margin-inline: 1px; }
+}
