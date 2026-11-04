@@ -111,10 +111,16 @@
         loopId=requestAnimationFrame(tick);
       }else{paused=false;}
     }
-    if(previousFocus?.isConnected)previousFocus.focus({preventScroll:true});
+    // The header button may retain focus after a help/other-games dialog.
+    // While playing, put focus back onto the game surface, not a toolbar action.
+    if(!$('gameScreen').classList.contains('hidden') && ['scene','guess','reveal','loading'].includes(stage)) {
+      $('gameScreen').focus({preventScroll:true});
+    } else if(previousFocus?.isConnected) {
+      previousFocus.focus({preventScroll:true});
+    }
   }
   function showHelp() { playSfx('ui_open'); modalOpen('help',`<div class="modal-kicker">THE RULES</div><h2 class="modal-title" id="modalTitle">게임 방법</h2><div class="instructions"><div class="instruction-row"><span class="instruction-num">01</span><div><strong>3초간 장면 감상</strong><small>영화 장면이 딱 3초 동안 표시됩니다.</small></div></div><div class="instruction-row"><span class="instruction-num">02</span><div><strong>5초 동안 머릿속으로 추리</strong><small>장면이 사라지고 카운트다운이 시작됩니다.</small></div></div><div class="instruction-row"><span class="instruction-num">03</span><div><strong>포스터와 제목으로 정답 공개</strong><small>정답이 3초 동안 보인 후 자동으로 다음 장면이 나옵니다.</small></div></div></div>`); }
-  function showOther() { playSfx('ui_open'); modalOpen('other',`<div class="modal-kicker">MORE GAMES</div><h2 class="modal-title" id="modalTitle">이외 게임</h2><p class="modal-desc">추후 추가 예정인 게임들입니다.</p><div class="games-list">${Object.entries(OPTIONS).map(([name],i)=>`<button class="other-game" data-other="${escapeHtml(name)}"><span class="other-game-icon">${['♫','▣','✦','♪','⌘'][i]}</span>${escapeHtml(name)}<span class="go">↗</span></button>`).join('')}</div>`); qsa('[data-other]').forEach(btn=>btn.addEventListener('click',()=>{const link=OPTIONS[btn.dataset.other];if(link){window.open(link,'_blank','noopener,noreferrer')}else{showNotice('링크 추가 전입니다.')}})); }
+  function showOther() { playSfx('ui_open'); modalOpen('other',`<div class="modal-kicker">MORE GAMES</div><h2 class="modal-title" id="modalTitle">이외 게임</h2><div class="games-list">${Object.entries(OPTIONS).map(([name],i)=>`<button class="other-game" data-other="${escapeHtml(name)}"><span class="other-game-icon">${['♫','▣','✦','♪','⌘'][i]}</span>${escapeHtml(name)}<span class="go">↗</span></button>`).join('')}</div>`); qsa('[data-other]').forEach(btn=>btn.addEventListener('click',()=>{const link=OPTIONS[btn.dataset.other];if(link){window.open(link,'_blank','noopener,noreferrer')}else{showNotice('게임 추가 전입니다. 추후 이용 부탁드립니다.')}})); }
   function showLibrary() { const rows=LEVELS.map(level=>{const items=catalog.filter(q=>q.level===level);return `<div class="library-row">${level}<span>${items.length}개 장면 · ${new Set(items.map(m=>m.title)).size}편</span></div>`}).join('');modalOpen('library',`<div class="modal-kicker">SCENE LIBRARY</div><h2 class="modal-title" id="modalTitle">영화 라이브러리</h2><p class="modal-desc">현재 웹사이트가 인식한 장면입니다.</p><div class="library-summary"><span class="status-indicator ${sourceType==='github'||sourceType==='manifest'||sourceType==='bundle'?'live':''}"></span>${sourceType==='github'?'GitHub 저장소에서 자동 인식':sourceType==='manifest'?'manifest.json에서 인식':'데모 샘플 모드'}</div><div class="library-list">${rows}</div><p class="fineprint">영화 장면 추가: <code>movies/한국 영화/영화제목/쉬움/01.jpg</code> · 포스터: <code>movies/외국 영화/영화제목/포스터.jpg</code><br/>GitHub Pages는 공개 저장소에서 폴더 목록을 자동으로 읽습니다. 로컬 파일 실행 또는 GitHub API 제한 상황에서는 manifest.json을 사용합니다.</p>`); }
   function pause() { if(stage==='idle'||stage==='loading'||paused)return;pauseStageAudio();playSfx('pause');paused=true;cancelAnimationFrame(loopId);modalOpen('pause',`<div class="modal-kicker">INTERMISSION</div><h2 class="modal-title" id="modalTitle">잠시 정지했습니다.</h2><p class="modal-desc">남은 시간은 그대로 유지됩니다. 준비되면 다시 계속하세요.</p><div class="modal-actions"><button class="modal-action primary" id="resumeBtn"><svg><use href="#i-play"/></svg> 계속하기 <span>RESUME</span></button><button class="modal-action" id="restartBtn"><svg><use href="#i-refresh"/></svg> 처음부터 다시 시작 <span>RESTART</span></button><button class="modal-action" id="returnBtn"><svg><use href="#i-home"/></svg> 메인 메뉴로 이동 <span>HOME</span></button></div>`);$('resumeBtn').onclick=resume;$('restartBtn').onclick=()=>{modalClose(true);startGame();};$('returnBtn').onclick=()=>{modalClose(true);goHome();};selectPauseItem(0); }
   function selectPauseItem(i){
@@ -261,7 +267,7 @@
     await Promise.all([preloadScene(queue[0].scene),preloadPoster(queue[0].poster)]);
     btn.disabled=false;
     if(token!==sceneLoadToken)return;
-    playSfx('game_start');showScreen('gameScreen');beginScene();
+    playSfx('game_start');showScreen('gameScreen');$('gameScreen').focus({preventScroll:true});beginScene();
   }
   function setStage(name,seconds){stopStageAudio();cancelAnimationFrame(loopId);stage=name;$('gameScreen').dataset.stage=name;stageRemaining=seconds;lastTick=performance.now();$('scenePanel').classList.toggle('hidden',name!=='scene');$('guessPanel').classList.toggle('hidden',name!=='guess');$('revealPanel').classList.toggle('hidden',name!=='reveal');$('nextBtn').classList.toggle('hidden',name!=='reveal');$('skipBtn').classList.toggle('hidden',name!=='scene'&&name!=='guess');$('stageHint').classList.toggle('hidden',name!=='reveal');if(name==='scene'||name==='guess'||name==='reveal')loopId=requestAnimationFrame(tick);}
   function beginScene(){currentMovie=queue[index]; preparePoster(currentMovie); if(index+1<queue.length){preloadScene(queue[index+1].scene);preloadPoster(queue[index+1].poster);}$('gameIndex').textContent=format2(index+1);$('overallProgress').style.width=`${index/queue.length*100}%`;$('scenePanel').style.setProperty('--scene-backdrop', `url("${currentMovie.scene.replaceAll('\"','%22')}")`);$('sceneImage').src=currentMovie.scene;$('sceneImage').alt=`${selectedLevel} 난이도 ${index+1}번째 영화 장면`;$('stageTitle').textContent='이 장면을 기억하세요.';$('stageSubtitle').textContent='3초 동안 영화 장면이 공개됩니다.';$('stageHint').textContent='장면에 집중하세요.';setStage('scene',3);if(index===0)playSfx('scene_show');}
@@ -589,16 +595,21 @@ function renderPosterMarquee(itemsOverride){
     $('skipBtn').onclick=skipStage;
     $('nextBtn').onclick=nextScene;$('replayBtn').onclick=startGame;$('finishHomeBtn').onclick=goHome;
     $('modalClose').onclick=()=>modalClose();$('modalBackdrop').onclick=e=>{if(e.target===$('modalBackdrop'))modalClose();};
+    // v45: During active gameplay, Enter belongs exclusively to stage controls.
+    // Capture before native button activation: a focused header button (e.g.
+    // '이외 게임') must never open as a side effect of skipping/revealing.
     document.addEventListener('keydown',e=>{
-      if(e.key!=='Enter'||e.repeat||!['scene','guess'].includes(stage))return;
+      if(e.key!=='Enter'||$('gameScreen').classList.contains('hidden'))return;
+      if(!['scene','guess','reveal','loading'].includes(stage))return;
       if(paused||modal||!$('noticeBackdrop').classList.contains('hidden')||!$('posterLightbox').classList.contains('hidden'))return;
-      if($('gameScreen').classList.contains('hidden'))return;
-      // Enter still activates a focused toolbar control; elsewhere it skips.
-      const focus=document.activeElement;
-      if(focus&&focus!==$('skipBtn')&&focus.closest?.('.game-controls'))return;
-      e.preventDefault();e.stopImmediatePropagation();skipStage();
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if(e.repeat)return;
+      if(stage==='scene'||stage==='guess')skipStage();
+      else if(stage==='reveal')nextScene();
+      // While loading, consume Enter but do not advance twice.
     },true);
-    document.addEventListener('keydown',e=>{if(!$('noticeBackdrop').classList.contains('hidden')){if(e.key==='Escape'||e.key==='Enter'){e.preventDefault();closeNotice();}return;}if(modal==='pause' && ['ArrowDown','ArrowUp','ArrowRight','ArrowLeft','Home','End'].includes(e.key)){e.preventDefault();const items=['resumeBtn','restartBtn','returnBtn'].map($);const current=items.indexOf(document.activeElement);const next=e.key==='Home'?0:e.key==='End'?2:(current+(e.key==='ArrowDown'||e.key==='ArrowRight'?1:-1)+3)%3;selectPauseItem(next);return;}if(e.code==='Space'&&!['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement?.tagName)){if(!$('gameScreen').classList.contains('hidden')){e.preventDefault();paused?resume():pause();}}else if(e.key==='Escape'){if(modal){if(modal==='pause')resume();else modalClose();}else if(!$('gameScreen').classList.contains('hidden'))pause();else if(!$('settingsScreen').classList.contains('hidden'))goHome();}else if(e.key==='Enter'&&!modal&&stage==='reveal'&&!e.repeat){nextScene();}});
+    document.addEventListener('keydown',e=>{if(!$('noticeBackdrop').classList.contains('hidden')){if(e.key==='Escape'||e.key==='Enter'){e.preventDefault();closeNotice();}return;}if(modal==='pause' && ['ArrowDown','ArrowUp','ArrowRight','ArrowLeft','Home','End'].includes(e.key)){e.preventDefault();const items=['resumeBtn','restartBtn','returnBtn'].map($);const current=items.indexOf(document.activeElement);const next=e.key==='Home'?0:e.key==='End'?2:(current+(e.key==='ArrowDown'||e.key==='ArrowRight'?1:-1)+3)%3;selectPauseItem(next);return;}if(e.code==='Space'&&!['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement?.tagName)){if(!$('gameScreen').classList.contains('hidden')){e.preventDefault();paused?resume():pause();}}else if(e.key==='Escape'){if(modal){if(modal==='pause')resume();else modalClose();}else if(!$('gameScreen').classList.contains('hidden'))pause();else if(!$('settingsScreen').classList.contains('hidden'))goHome();}});
     document.addEventListener('visibilitychange',()=>{if(document.hidden&&!paused&&['scene','guess','reveal'].includes(stage))pause();});
     // v16: 중복 재생 방지 - 공통 document 클릭 효과음을 사용하지 않습니다.
     // 각 동작에서 효과음은 정확히 한 번만 발생하도록 별도 연결합니다.

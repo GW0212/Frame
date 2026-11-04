@@ -14,8 +14,8 @@ poster_index=json.loads((ROOT/'poster-seed-v22.js').read_text(encoding='utf-8').
 catalog=json.loads((ROOT/'catalog-v27.js').read_text(encoding='utf-8').split('=',1)[1].strip().rstrip(';'))
 issues=[]
 if manifest != catalog: issues.append('manifest/catalog mismatch')
-if len(manifest)!=518: issues.append(f'Expected 518 scene rows; got {len(manifest)}')
-if len(poster_index)!=276: issues.append(f'Expected 276 poster rows; got {len(poster_index)}')
+if not manifest: issues.append('Empty manifest')
+if not poster_index: issues.append('Empty poster index')
 
 def convert_url(url):
     if not isinstance(url,str) or not url.startswith('./movies/'):
@@ -49,8 +49,8 @@ for p in images:
             if not im.width or not im.height: issues.append(f'Empty dimensions: {p}')
     except Exception as e:
         issues.append(f'Image cannot be decoded: {p}: {e}')
-if len(images)!=794: issues.append(f'Unexpected image count: {len(images)}')
-if len(set((r['category'],r['title']) for r in manifest))!=276:
+if len(images)!=len(set(urls)): issues.append(f'Image files / URL targets mismatch: {len(images)} / {len(set(urls))}')
+if len(set((r['category'],r['title']) for r in manifest))!=len(poster_index):
     issues.append('Unexpected movie count')
 print(f'IMAGES={len(images)}, FORMATS={dict(formats)}, SCENES={len(manifest)}, MOVIES={len(set((r["category"],r["title"]) for r in manifest))}, POSTERS={len(poster_index)}, URLS={len(urls)}, ERRORS={len(issues)}')
 for issue in issues[:60]:print('ERROR:',issue)

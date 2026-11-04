@@ -114,3 +114,7 @@
  .screen-settings .tier-bottom{padding-top:3px!important;}
 }
 @media(prefers-reduced-motion:reduce){.screen-settings .difficulty.tier-card{transition:none!important}}
+
+/* v45: no numerical caption above the icon; keep centered spacing. */
+.screen-settings .difficulty.tier-card { justify-content:center!important; }
+.screen-settings .tier-body { flex:0 1 auto!important; }
