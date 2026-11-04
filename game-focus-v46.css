@@ -1,0 +1,8 @@
+/* FRAME! v46 - Never draw a focus outline around the entire game screen.
+   The game container is focused programmatically for keyboard controls.
+   Keyboard outlines for real buttons and pause-menu selections stay intact. */
+#gameScreen.screen-game:focus,
+#gameScreen.screen-game:focus-visible {
+  outline: none !important;
+  outline-width: 0 !important;
+}

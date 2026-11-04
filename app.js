@@ -604,6 +604,9 @@ function renderPosterMarquee(itemsOverride){
       if(paused||modal||!$('noticeBackdrop').classList.contains('hidden')||!$('posterLightbox').classList.contains('hidden'))return;
       e.preventDefault();
       e.stopImmediatePropagation();
+      // v46: Clear programmatic focus on the non-interactive game container.
+      // Otherwise keyboard modality can draw the browser's large black outline.
+      if(document.activeElement===$('gameScreen')) $('gameScreen').blur();
       if(e.repeat)return;
       if(stage==='scene'||stage==='guess')skipStage();
       else if(stage==='reveal')nextScene();
